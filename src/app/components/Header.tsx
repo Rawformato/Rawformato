@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import logoWhite from 'figma:asset/7e4c761982cfd33b40265ce2d3e2d199b4993d4b.png';
+import logoWhite from '@/assets/7e4c761982cfd33b40265ce2d3e2d199b4993d4b.png';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
