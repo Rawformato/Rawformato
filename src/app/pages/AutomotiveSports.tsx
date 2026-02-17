@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/Button';
 import { ContactForm } from '../components/ContactForm';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 export default function AutomotiveSports() {
   const deliverables = [
@@ -66,6 +67,16 @@ export default function AutomotiveSports() {
     <div className="relative">
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0">
+          <ImageWithFallback 
+            src="https://images.unsplash.com/photo-1763048243201-c346f3508bb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcG9ydHMlMjBjYXIlMjByYWNpbmclMjB0cmFja3xlbnwxfHx8fDE3NzEyNDg0MDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Automotive Performance"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/80 via-[#0B0B0E]/90 to-[#0B0B0E]" />
+        </div>
+
         <div className="absolute inset-0">
           <motion.div
             animate={{
@@ -172,6 +183,16 @@ export default function AutomotiveSports() {
               <p className="text-xl text-[#F2F2F2]/60 mb-8 leading-relaxed">
                 From creative production to conversion optimization, we handle every touchpoint of your customer journey.
               </p>
+              
+              {/* Add image showcase */}
+              <div className="relative rounded-2xl overflow-hidden border border-[#8B5CF6]/20">
+                <ImageWithFallback 
+                  src="https://images.unsplash.com/photo-1763165524637-9067debdc80b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBjYXIlMjBkZWFsZXJzaGlwJTIwc2hvd3Jvb218ZW58MXx8fHwxNzcxMjM0NTM2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  alt="Luxury Automotive Showroom"
+                  className="w-full h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E] via-transparent to-transparent" />
+              </div>
             </motion.div>
 
             <motion.div

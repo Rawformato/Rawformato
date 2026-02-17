@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/Button';
 import { ContactForm } from '../components/ContactForm';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 export default function Restaurants() {
   const weeklySystem = [
@@ -51,6 +52,16 @@ export default function Restaurants() {
     <div className="relative">
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0">
+          <ImageWithFallback 
+            src="https://images.unsplash.com/photo-1750943082012-efe6d2fd9e45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3VybWV0JTIwZm9vZCUyMHBsYXRpbmclMjBjaGVmfGVufDF8fHx8MTc3MTI5MDk3Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Gourmet Food"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/80 via-[#0B0B0E]/90 to-[#0B0B0E]" />
+        </div>
+
         <div className="absolute inset-0">
           <motion.div
             animate={{

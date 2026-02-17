@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
+import logoWhite from 'figma:asset/7e4c761982cfd33b40265ce2d3e2d199b4993d4b.png';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,10 +42,11 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="relative group">
-            <span className="text-2xl font-bold tracking-tight">
-              <span className="text-[#F2F2F2]">RAW</span>
-              <span className="text-[#8B5CF6] ml-1">Formato</span>
-            </span>
+            <img 
+              src={logoWhite} 
+              alt="RAW Formato" 
+              className="h-10 w-auto transition-transform group-hover:scale-105"
+            />
             <div className="absolute -inset-2 bg-[#8B5CF6]/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
 
