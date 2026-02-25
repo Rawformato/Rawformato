@@ -24,7 +24,7 @@ export function AnimatedBackground({ variant = 'section' }: AnimatedBackgroundPr
         }}
         className={`absolute ${
           isHero ? 'top-1/4 left-1/4 w-96 h-96' : 'top-1/3 right-1/4 w-80 h-80'
-        } bg-[#8B5CF6]/20 rounded-full blur-[100px]`}
+        } bg-[#E5E5E5]/20 rounded-full blur-[100px]`}
       />
       
       {isHero && (
@@ -40,7 +40,7 @@ export function AnimatedBackground({ variant = 'section' }: AnimatedBackgroundPr
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#8B5CF6]/15 rounded-full blur-[120px]"
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#E5E5E5]/15 rounded-full blur-[120px]"
         />
       )}
       

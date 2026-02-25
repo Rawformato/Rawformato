@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="relative border-t border-white/10 bg-[#0B0B0E]">
       {/* Subtle glow effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-[#8B5CF6]/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-[#E5E5E5]/50 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12">
@@ -16,7 +16,7 @@ export function Footer() {
             <Link to="/" className="inline-block mb-4">
               <span className="text-2xl font-bold">
                 <span className="text-[#F2F2F2]">RAW</span>
-                <span className="text-[#8B5CF6] ml-1">Formato</span>
+                <span className="text-[#E5E5E5] ml-1">Formato</span>
               </span>
             </Link>
             <p className="text-[#F2F2F2]/60 text-sm leading-relaxed mb-6">
@@ -27,13 +27,13 @@ export function Footer() {
                 href="https://instagram.com/rawformato"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#F2F2F2]/60 hover:text-[#8B5CF6] transition-colors"
+                className="text-[#F2F2F2]/60 hover:text-[#E5E5E5] transition-colors"
               >
                 <Instagram size={20} />
               </a>
               <a
                 href="#"
-                className="text-[#F2F2F2]/60 hover:text-[#8B5CF6] transition-colors"
+                className="text-[#F2F2F2]/60 hover:text-[#E5E5E5] transition-colors"
               >
                 <Linkedin size={20} />
               </a>
@@ -45,17 +45,17 @@ export function Footer() {
             <h4 className="font-semibold text-[#F2F2F2] mb-4">Industries</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/automotive-sports" className="text-[#F2F2F2]/60 hover:text-[#8B5CF6] text-sm transition-colors">
+                <Link to="/automotive-sports" className="text-[#F2F2F2]/60 hover:text-[#E5E5E5] text-sm transition-colors">
                   Automotive & Sports
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants" className="text-[#F2F2F2]/60 hover:text-[#8B5CF6] text-sm transition-colors">
+                <Link to="/restaurants" className="text-[#F2F2F2]/60 hover:text-[#E5E5E5] text-sm transition-colors">
                   Restaurants
                 </Link>
               </li>
               <li>
-                <Link to="/realtors-builders" className="text-[#F2F2F2]/60 hover:text-[#8B5CF6] text-sm transition-colors">
+                <Link to="/realtors-builders" className="text-[#F2F2F2]/60 hover:text-[#E5E5E5] text-sm transition-colors">
                   Realtors & Builders
                 </Link>
               </li>
@@ -84,11 +84,15 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2 text-[#F2F2F2]/60 text-sm">
                 <Phone size={16} className="mt-0.5 shrink-0" />
-                <span>PHONE_PLACEHOLDER</span>
+                <a href="tel:+17865551234" className="hover:text-[#E5E5E5] transition-colors">
+                  +1 (786) 555-1234
+                </a>
               </li>
               <li className="flex items-start gap-2 text-[#F2F2F2]/60 text-sm">
                 <Mail size={16} className="mt-0.5 shrink-0" />
-                <span>EMAIL_PLACEHOLDER</span>
+                <a href="mailto:hello@rawformato.com" className="hover:text-[#E5E5E5] transition-colors">
+                  hello@rawformato.com
+                </a>
               </li>
               <li className="flex items-start gap-2 text-[#F2F2F2]/60 text-sm">
                 <Instagram size={16} className="mt-0.5 shrink-0" />
@@ -96,7 +100,7 @@ export function Footer() {
                   href="https://instagram.com/rawformato"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#8B5CF6] transition-colors"
+                  className="hover:text-[#E5E5E5] transition-colors"
                 >
                   @rawformato
                 </a>
@@ -111,10 +115,10 @@ export function Footer() {
             © {currentYear} RAW Formato. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-[#F2F2F2]/40 hover:text-[#8B5CF6] text-sm transition-colors">
+            <a href="#" className="text-[#F2F2F2]/40 hover:text-[#E5E5E5] text-sm transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-[#F2F2F2]/40 hover:text-[#8B5CF6] text-sm transition-colors">
+            <a href="#" className="text-[#F2F2F2]/40 hover:text-[#E5E5E5] text-sm transition-colors">
               Terms of Service
             </a>
           </div>

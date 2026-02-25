@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Send, Instagram } from 'lucide-react';
+import { Send, Instagram, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,11 +10,43 @@ export function ContactForm() {
     industry: '',
     message: '',
   });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic would go here
-    console.log('Form submitted:', formData);
+    setStatus('loading');
+
+    try {
+      // TODO: Integrate with Resend API
+      // POST to your backend API endpoint that uses Resend
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      setStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        industry: '',
+        message: '',
+      });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setStatus('error');
+      setErrorMessage('Failed to send message. Please try again or contact us directly on Instagram.');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -34,7 +66,7 @@ export function ContactForm() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-            Ready to <span className="text-[#8B5CF6]">Scale</span>?
+            Ready to <span className="text-[#E5E5E5]">Scale</span>?
           </h2>
           <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
             Let's build something extraordinary together
@@ -61,7 +93,7 @@ export function ContactForm() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#E5E5E5] focus:ring-1 focus:ring-[#E5E5E5] outline-none transition-colors"
                   placeholder="Your name"
                 />
               </div>
@@ -77,7 +109,7 @@ export function ContactForm() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#E5E5E5] focus:ring-1 focus:ring-[#E5E5E5] outline-none transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
@@ -92,7 +124,7 @@ export function ContactForm() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#E5E5E5] focus:ring-1 focus:ring-[#E5E5E5] outline-none transition-colors"
                   placeholder="Your company"
                 />
               </div>
@@ -106,13 +138,13 @@ export function ContactForm() {
                   name="industry"
                   value={formData.industry}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] focus:border-[#E5E5E5] focus:ring-1 focus:ring-[#E5E5E5] outline-none transition-colors"
                 >
-                  <option value="">Select an industry</option>
-                  <option value="automotive">Automotive & Sports</option>
-                  <option value="restaurants">Restaurants</option>
-                  <option value="realestate">Realtors & Builders</option>
-                  <option value="other">Other</option>
+                  <option value="" className="bg-[#1a1a1e]">Select an industry</option>
+                  <option value="automotive" className="bg-[#1a1a1e]">Automotive & Sports</option>
+                  <option value="restaurants" className="bg-[#1a1a1e]">Restaurants</option>
+                  <option value="realestate" className="bg-[#1a1a1e]">Realtors & Builders</option>
+                  <option value="other" className="bg-[#1a1a1e]">Other</option>
                 </select>
               </div>
 
@@ -126,20 +158,75 @@ export function ContactForm() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] placeholder:text-[#F2F2F2]/30 focus:border-[#E5E5E5] focus:ring-1 focus:ring-[#E5E5E5] outline-none transition-colors resize-none"
                   placeholder="Tell us about your project..."
                 />
               </div>
 
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-3.5 bg-[#8B5CF6] text-[#F2F2F2] rounded-full font-medium flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(139,92,246,0.4)] transition-shadow"
+                disabled={status === 'loading'}
+                whileHover={status !== 'loading' ? { scale: 1.02 } : {}}
+                whileTap={status !== 'loading' ? { scale: 0.98 } : {}}
+                className={`w-full px-8 py-3.5 rounded-full font-medium flex items-center justify-center gap-2 transition-all ${
+                  status === 'loading'
+                    ? 'bg-[#E5E5E5]/50 cursor-not-allowed text-[#F2F2F2]'
+                    : status === 'success'
+                    ? 'bg-green-600 hover:bg-green-700 text-[#F2F2F2]'
+                    : status === 'error'
+                    ? 'bg-red-600 hover:bg-red-700 text-[#F2F2F2]'
+                    : 'bg-[#E5E5E5] hover:shadow-[0_0_30px_rgba(229,229,229,0.4)] text-[#0B0B0E]'
+                }`}
               >
-                Send Message
-                <Send size={18} />
+                {status === 'loading' ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : status === 'success' ? (
+                  <>
+                    <CheckCircle2 size={18} />
+                    Message Sent!
+                  </>
+                ) : status === 'error' ? (
+                  <>
+                    <AlertCircle size={18} />
+                    Try Again
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={18} />
+                  </>
+                )}
               </motion.button>
+
+              {/* Status Messages */}
+              {status === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm"
+                >
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0" />
+                    <span>Thank you! We'll get back to you within 24 hours.</span>
+                  </div>
+                </motion.div>
+              )}
+
+              {status === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm"
+                >
+                  <div className="flex items-start gap-2">
+                    <AlertCircle size={16} className="mt-0.5 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                </motion.div>
+              )}
             </form>
           </motion.div>
 
@@ -151,9 +238,9 @@ export function ContactForm() {
             className="space-y-8"
           >
             {/* Instagram Card */}
-            <div className="relative p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#8B5CF6]/50 transition-colors">
-              <div className="mb-6 inline-flex p-4 rounded-full bg-[#8B5CF6]/10">
-                <Instagram size={32} className="text-[#8B5CF6]" />
+            <div className="relative p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#E5E5E5]/50 transition-colors">
+              <div className="mb-6 inline-flex p-4 rounded-full bg-[#E5E5E5]/10">
+                <Instagram size={32} className="text-[#E5E5E5]" />
               </div>
               <h3 className="text-2xl font-bold text-[#F2F2F2] mb-3">
                 DM Us on Instagram
@@ -165,7 +252,7 @@ export function ContactForm() {
                 href="https://instagram.com/rawformato"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#8B5CF6] font-medium hover:gap-4 transition-all"
+                className="inline-flex items-center gap-2 text-[#E5E5E5] font-medium hover:gap-4 transition-all"
               >
                 <span>@rawformato</span>
                 <span>→</span>
@@ -179,15 +266,15 @@ export function ContactForm() {
               </h3>
               <ul className="space-y-3 text-[#F2F2F2]/60">
                 <li className="flex items-start gap-3">
-                  <span className="text-[#8B5CF6] mt-1">✓</span>
+                  <span className="text-[#E5E5E5] mt-1">✓</span>
                   <span>Response within 24 hours</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#8B5CF6] mt-1">✓</span>
+                  <span className="text-[#E5E5E5] mt-1">✓</span>
                   <span>Free 30-minute strategy call</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#8B5CF6] mt-1">✓</span>
+                  <span className="text-[#E5E5E5] mt-1">✓</span>
                   <span>Custom proposal within 3 days</span>
                 </li>
               </ul>

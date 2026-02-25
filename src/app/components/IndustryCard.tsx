@@ -15,14 +15,14 @@ export function IndustryCard({ icon, title, description, link }: IndustryCardPro
     <Link to={link}>
       <motion.div
         whileHover={{ y: -8 }}
-        className="group relative h-full p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm overflow-hidden transition-all hover:border-[#8B5CF6]/50"
+        className="group relative h-full p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm overflow-hidden transition-all hover:border-[#E5E5E5]/50"
       >
         {/* Background glow on hover */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/0 via-[#8B5CF6]/0 to-[#8B5CF6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#E5E5E5]/0 via-[#E5E5E5]/0 to-[#E5E5E5]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Content */}
         <div className="relative z-10">
-          <div className="mb-6 text-[#8B5CF6] group-hover:scale-110 transition-transform duration-300">
+          <div className="mb-6 text-[#E5E5E5] group-hover:scale-110 transition-transform duration-300">
             {icon}
           </div>
           
@@ -34,7 +34,7 @@ export function IndustryCard({ icon, title, description, link }: IndustryCardPro
             {description}
           </p>
           
-          <div className="flex items-center gap-2 text-[#8B5CF6] font-medium group-hover:gap-4 transition-all">
+          <div className="flex items-center gap-2 text-[#E5E5E5] font-medium group-hover:gap-4 transition-all">
             <span>Explore</span>
             <ArrowRight size={20} />
           </div>

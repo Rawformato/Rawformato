@@ -10,11 +10,19 @@ export function Header() {
   const location = useLocation();
 
   useEffect(() => {
+    let rafId = 0;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        rafId = 0;
+      });
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {
@@ -47,7 +55,7 @@ export function Header() {
               alt="RAW Formato" 
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
-            <div className="absolute -inset-2 bg-[#8B5CF6]/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute -inset-2 bg-[#E5E5E5]/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -58,7 +66,7 @@ export function Header() {
                 to={link.path}
                 className={`relative text-sm transition-colors ${
                   location.pathname === link.path
-                    ? 'text-[#8B5CF6]'
+                    ? 'text-[#E5E5E5]'
                     : 'text-[#F2F2F2]/70 hover:text-[#F2F2F2]'
                 }`}
               >
@@ -66,7 +74,7 @@ export function Header() {
                 {location.pathname === link.path && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-[#8B5CF6]"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-[#E5E5E5]"
                   />
                 )}
               </Link>
@@ -77,10 +85,9 @@ export function Header() {
           <div className="hidden lg:block">
             <a
               href="#contact"
-              className="group relative inline-flex items-center gap-2 px-6 py-2.5 bg-[#8B5CF6] text-[#F2F2F2] rounded-full overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]"
+              className="group relative inline-flex items-center gap-2 px-6 py-2.5 bg-[#E5E5E5] text-[#0B0B0E] rounded-full overflow-hidden transition-all hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
             >
               <span className="relative z-10">Book a Strategy Call</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
           </div>
 
@@ -108,7 +115,7 @@ export function Header() {
                   to={link.path}
                   className={`text-sm py-2 transition-colors ${
                     location.pathname === link.path
-                      ? 'text-[#8B5CF6]'
+                      ? 'text-[#E5E5E5]'
                       : 'text-[#F2F2F2]/70'
                   }`}
                 >
@@ -117,7 +124,7 @@ export function Header() {
               ))}
               <a
                 href="#contact"
-                className="mt-4 text-center px-6 py-2.5 bg-[#8B5CF6] text-[#F2F2F2] rounded-full"
+                className="mt-4 text-center px-6 py-2.5 bg-[#E5E5E5] text-[#0B0B0E] rounded-full hover:bg-white transition-colors"
               >
                 Book a Strategy Call
               </a>

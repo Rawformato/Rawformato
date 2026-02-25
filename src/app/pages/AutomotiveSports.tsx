@@ -1,16 +1,48 @@
+import { useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Target, 
-  Video, 
-  TrendingUp, 
+import {
+  Target,
+  Video,
+  TrendingUp,
   Calendar,
   CheckCircle2,
-  ArrowRight,
-  Zap
+  Zap,
+  Play,
+  Users
 } from 'lucide-react';
 import { Button } from '../components/Button';
+import { VideoCard } from '../components/VideoCard';
 import { ContactForm } from '../components/ContactForm';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { Testimonials } from '../components/Testimonials';
+import { Stats } from '../components/Stats';
+import { FAQ } from '../components/FAQ';
+
+/* ── Lazy video: play only when visible ── */
+function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    const video = videoRef.current;
+    if (!el || !video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { rootMargin: '200px', threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-full">
+      <video ref={videoRef} muted loop playsInline preload="none" src={src} className={className} />
+    </div>
+  );
+}
 
 export default function AutomotiveSports() {
   const deliverables = [
@@ -63,34 +95,51 @@ export default function AutomotiveSports() {
     },
   ];
 
+  const showcaseVideos = [
+    { src: '/videos/auto-teaser.mp4', title: 'Auto Teaser', category: 'Automotive' },
+    { src: '/videos/mimessi-cafe.mp4', title: 'Mimessi Collection', category: 'Luxury Cars' },
+    { src: '/videos/mfk-dyno.mp4', title: 'MFK Performance', category: 'Performance' },
+    { src: '/videos/aston-martin.mp4', title: 'Aston Martin Showcase', category: 'Luxury Cars' },
+    { src: '/videos/moto-aprilia.mp4', title: 'Aprilia Showcase', category: 'Motorsport' },
+    { src: '/videos/hayabusa.mp4', title: 'Hayabusa', category: 'Motorsport' },
+  ];
+
+  const reelVideos = [
+    '/videos/auto-teaser.mp4',
+    '/videos/mfk-dyno.mp4',
+    '/videos/moto-aprilia.mp4',
+    '/videos/aston-martin.mp4',
+    '/videos/hayabusa.mp4',
+    '/videos/showtime-meza.mp4',
+    '/videos/gym-workout.mp4',
+    '/videos/karate-academy.mp4',
+  ];
+
   return (
     <div className="relative">
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Hero Background Image */}
+      {/* ═══════════════════════════════════════
+          HERO — Cinematic Video Background
+          ═══════════════════════════════════════ */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden -mt-20 pt-20">
         <div className="absolute inset-0">
-          <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1763048243201-c346f3508bb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcG9ydHMlMjBjYXIlMjByYWNpbmclMjB0cmFja3xlbnwxfHx8fDE3NzEyNDg0MDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            alt="Automotive Performance"
-            className="w-full h-full object-cover opacity-20"
+          <video
+            autoPlay muted loop playsInline preload="auto"
+            src="/videos/auto-teaser.mp4"
+            className="w-full h-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/80 via-[#0B0B0E]/90 to-[#0B0B0E]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0E]/40 via-transparent to-[#0B0B0E]/40" />
         </div>
+
+        {/* Vignette */}
+        <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 200px 40px rgba(11,11,14,0.5)' }} />
 
         <div className="absolute inset-0">
           <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#8B5CF6]/20 rounded-full blur-[100px]"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]"
           />
-          <div className="absolute inset-0 opacity-[0.015] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JhaW4iIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFpbikiLz48L3N2Zz4=')]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32">
@@ -100,18 +149,20 @@ export default function AutomotiveSports() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 mb-8">
-              <Zap size={16} className="text-[#8B5CF6]" />
-              <span className="text-sm text-[#8B5CF6]">Automotive & Sports Marketing</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] backdrop-blur-xl border border-white/[0.1] mb-8">
+              <Zap size={16} className="text-[#E5E5E5]" />
+              <span className="text-sm text-white/70 font-medium">Automotive & Sports Marketing</span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#F2F2F2] mb-8 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
               Performance Marketing for
               <br />
-              <span className="text-[#8B5CF6]">Brands Built to Win.</span>
+              <span className="bg-gradient-to-r from-white via-white/70 to-white/50 bg-clip-text text-transparent">
+                Brands Built to Win.
+              </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-[#F2F2F2]/70 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
               Drive qualified leads, build brand loyalty, and dominate your market with campaigns designed for speed.
             </p>
 
@@ -119,15 +170,17 @@ export default function AutomotiveSports() {
               <Button variant="primary" href="#contact">
                 Get a Performance Plan
               </Button>
-              <Button variant="secondary" href="#packages">
-                View Packages
+              <Button variant="secondary" href="#work">
+                View Our Work
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* What We Deliver */}
+      {/* ═══════════════════════════════════════
+          WHAT WE DELIVER — Icon Grid
+          ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
@@ -137,29 +190,31 @@ export default function AutomotiveSports() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-              What We <span className="text-[#8B5CF6]">Deliver</span>
+              What We <span className="text-[#E5E5E5]">Deliver</span>
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
               Every service your automotive or sports brand needs to accelerate
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <Target size={24} />, title: 'Lead Generation', desc: 'High-intent buyers ready to act' },
-              { icon: <Video size={24} />, title: 'Content Production', desc: 'Lifestyle and performance visuals' },
-              { icon: <TrendingUp size={24} />, title: 'Retargeting', desc: 'Stay top-of-mind with warm audiences' },
-              { icon: <Calendar size={24} />, title: 'Seasonal Campaigns', desc: 'Launch promotions that move inventory' },
+              { icon: <Target size={28} />, title: 'Lead Generation', desc: 'High-intent buyers ready to act' },
+              { icon: <Video size={28} />, title: 'Content Production', desc: 'Lifestyle and performance visuals' },
+              { icon: <TrendingUp size={28} />, title: 'Retargeting', desc: 'Stay top-of-mind with warm audiences' },
+              { icon: <Calendar size={28} />, title: 'Seasonal Campaigns', desc: 'Launch promotions that move inventory' },
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#8B5CF6]/50 transition-colors"
+                transition={{ duration: 0.4 }}
+                className="group p-6 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all"
               >
-                <div className="mb-4 text-[#8B5CF6]">{item.icon}</div>
+                <div className="mb-4 inline-flex p-3 rounded-xl bg-[#E5E5E5]/10 text-[#E5E5E5] group-hover:scale-110 transition-transform">
+                  {item.icon}
+                </div>
                 <h3 className="text-lg font-semibold text-[#F2F2F2] mb-2">{item.title}</h3>
                 <p className="text-sm text-[#F2F2F2]/60">{item.desc}</p>
               </motion.div>
@@ -168,8 +223,133 @@ export default function AutomotiveSports() {
         </div>
       </section>
 
-      {/* Deliverables List */}
-      <section className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#8B5CF6]/[0.02] to-transparent">
+      {/* ═══════════════════════════════════════
+          VIDEO PORTFOLIO — Hover-to-Play Grid
+          ═══════════════════════════════════════ */}
+      <section id="work" className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#E5E5E5]/[0.02] to-transparent">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-4">
+              Our Automotive <span className="text-[#E5E5E5]">Portfolio</span>
+            </h2>
+            <p className="text-lg text-[#F2F2F2]/40 max-w-xl mx-auto">
+              Hover to preview. From luxury dealerships to performance brands.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+            {showcaseVideos.map((video, index) => (
+              <VideoCard
+                key={index}
+                src={video.src}
+                title={video.title}
+                category={video.category}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          VIDEO REEL — Horizontal Auto-Scroll
+          ═══════════════════════════════════════ */}
+      <section className="relative py-12 lg:py-20 overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <span className="text-[11px] text-white/25 uppercase tracking-[0.3em] font-medium">
+            Our Work in Motion
+          </span>
+        </motion.div>
+
+        <div className="flex gap-4 md:gap-6 animate-scroll-reel">
+          {[...reelVideos, ...reelVideos].map((src, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-48 md:w-64 lg:w-72 aspect-[9/16] rounded-2xl overflow-hidden border border-white/[0.06] bg-[#111]"
+            >
+              <LazyVideo src={src} className="w-full h-full object-cover" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          FEATURED PROJECT — Spotlight
+          ═══════════════════════════════════════ */}
+      <section className="relative py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Video */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
+            >
+              <LazyVideo
+                src="/videos/mfk-dyno.mp4"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl flex items-center justify-center border border-white/20">
+                  <Play size={24} className="text-white ml-1" fill="white" />
+                </div>
+              </div>
+              <div className="absolute bottom-6 left-6">
+                <div className="inline-flex px-3 py-1 rounded-full bg-[#E5E5E5]/90 text-[#0B0B0E] text-sm font-medium mb-2">
+                  Featured Project
+                </div>
+                <h3 className="text-2xl font-bold text-white">MFK Performance</h3>
+              </div>
+            </motion.div>
+
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#F2F2F2] mb-6">
+                Turning Horsepower into <span className="text-[#E5E5E5]">High-Intent Leads</span>
+              </h2>
+              <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
+                We partnered with MFK to create high-octane content that captures the raw energy of their performance shop — then turned it into a lead generation machine with targeted campaigns.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
+                  <div className="text-3xl font-bold text-[#E5E5E5]">312%</div>
+                  <div className="text-sm text-[#F2F2F2]/50">Lead increase</div>
+                </div>
+                <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
+                  <div className="text-3xl font-bold text-[#E5E5E5]">4.8x</div>
+                  <div className="text-sm text-[#F2F2F2]/50">Return on ad spend</div>
+                </div>
+              </div>
+              <Button variant="outline" href="#contact">
+                Get Similar Results
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          DELIVERABLES
+          ═══════════════════════════════════════ */}
+      <section className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#E5E5E5]/[0.02] to-transparent">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -178,21 +358,14 @@ export default function AutomotiveSports() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-                Complete Marketing <span className="text-[#8B5CF6]">Ecosystem</span>
+                Complete Marketing <span className="text-[#E5E5E5]">Ecosystem</span>
               </h2>
               <p className="text-xl text-[#F2F2F2]/60 mb-8 leading-relaxed">
                 From creative production to conversion optimization, we handle every touchpoint of your customer journey.
               </p>
-              
-              {/* Add image showcase */}
-              <div className="relative rounded-2xl overflow-hidden border border-[#8B5CF6]/20">
-                <ImageWithFallback 
-                  src="https://images.unsplash.com/photo-1763165524637-9067debdc80b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBjYXIlMjBkZWFsZXJzaGlwJTIwc2hvd3Jvb218ZW58MXx8fHwxNzcxMjM0NTM2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Luxury Automotive Showroom"
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E] via-transparent to-transparent" />
-              </div>
+              <Button variant="outline" href="#contact">
+                Get Your Custom Plan
+              </Button>
             </motion.div>
 
             <motion.div
@@ -202,24 +375,34 @@ export default function AutomotiveSports() {
               className="space-y-4"
             >
               {deliverables.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="flex items-start gap-3 p-4 rounded-lg bg-[#F2F2F2]/[0.02] border border-white/5 hover:border-[#8B5CF6]/30 transition-colors"
+                  className="flex items-start gap-3 p-4 rounded-lg bg-[#F2F2F2]/[0.02] border border-white/5 hover:border-[#E5E5E5]/30 transition-colors"
                 >
-                  <CheckCircle2 size={20} className="text-[#8B5CF6] mt-0.5 shrink-0" />
+                  <CheckCircle2 size={20} className="text-[#E5E5E5] mt-0.5 shrink-0" />
                   <span className="text-[#F2F2F2]">{item}</span>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Packages */}
+      {/* Stats */}
+      <Stats
+        title={<>Performance <span className="text-[#E5E5E5]">Results</span></>}
+        subtitle="Real metrics from automotive and sports campaigns"
+        stats={[
+          { value: '312%', label: 'Lead Increase', sublabel: 'First 90 days', icon: <TrendingUp size={28} /> },
+          { value: '4.8x', label: 'ROAS Average', sublabel: 'Across campaigns', icon: <Target size={28} /> },
+          { value: '50+', label: 'Videos Produced', sublabel: 'Per quarter', icon: <Video size={28} /> },
+          { value: '2.4M+', label: 'Impressions', sublabel: 'Generated monthly', icon: <Users size={28} /> },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════
+          PACKAGES
+          ═══════════════════════════════════════ */}
       <section id="packages" className="relative py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
@@ -229,7 +412,7 @@ export default function AutomotiveSports() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-              Choose Your <span className="text-[#8B5CF6]">Growth Path</span>
+              Choose Your <span className="text-[#E5E5E5]">Growth Path</span>
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
               Flexible packages designed to match your ambition
@@ -240,43 +423,32 @@ export default function AutomotiveSports() {
             {packages.map((pkg, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ duration: 0.4 }}
                 className={`relative p-8 rounded-2xl border backdrop-blur-sm transition-all ${
                   pkg.highlighted
-                    ? 'border-[#8B5CF6] bg-[#8B5CF6]/5 scale-105'
-                    : 'border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#8B5CF6]/50'
+                    ? 'border-[#E5E5E5] bg-[#E5E5E5]/5 scale-105'
+                    : 'border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50'
                 }`}
               >
                 {pkg.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#8B5CF6] text-[#F2F2F2] text-sm font-medium rounded-full">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#E5E5E5] text-[#0B0B0E] text-sm font-medium rounded-full">
                     Most Popular
                   </div>
                 )}
-
-                <h3 className="text-2xl font-bold text-[#F2F2F2] mb-2">
-                  {pkg.name}
-                </h3>
-                <p className="text-[#F2F2F2]/60 mb-8">
-                  {pkg.description}
-                </p>
-
+                <h3 className="text-2xl font-bold text-[#F2F2F2] mb-2">{pkg.name}</h3>
+                <p className="text-[#F2F2F2]/60 mb-8">{pkg.description}</p>
                 <ul className="space-y-3 mb-8">
                   {pkg.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2 text-[#F2F2F2]/80">
-                      <CheckCircle2 size={18} className="text-[#8B5CF6] mt-0.5 shrink-0" />
+                      <CheckCircle2 size={18} className="text-[#E5E5E5] mt-0.5 shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-
-                <Button 
-                  variant={pkg.highlighted ? 'primary' : 'secondary'}
-                  href="#contact"
-                  className="w-full"
-                >
+                <Button variant={pkg.highlighted ? 'primary' : 'secondary'} href="#contact" className="w-full">
                   Get Started
                 </Button>
               </motion.div>
@@ -285,21 +457,50 @@ export default function AutomotiveSports() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Testimonials */}
+      <Testimonials
+        testimonials={[
+          {
+            name: 'Michael Rodriguez', role: 'Owner', company: 'Elite Auto Group',
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
+            content: 'RAW Formato transformed our digital presence. We went from struggling to get leads to having a waiting list. Their AI-powered creative testing is game-changing.',
+            rating: 5,
+          },
+          {
+            name: 'Carlos Mendez', role: 'Marketing Director', company: 'Precision Motors',
+            image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
+            content: 'The quality of leads has improved dramatically. These aren\'t tire kickers—they\'re serious buyers ready to purchase. Best ROI we\'ve seen.',
+            rating: 5,
+          },
+          {
+            name: 'Jennifer Park', role: 'General Manager', company: 'Luxury Auto Collection',
+            image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
+            content: 'Their content production is absolutely world-class. Every video, every photo—it all looks premium and drives real engagement.',
+            rating: 5,
+          },
+        ]}
+      />
+
+      {/* FAQ */}
+      <FAQ
+        title={<>Automotive Marketing <span className="text-[#E5E5E5]">FAQ</span></>}
+        items={[
+          { question: 'What types of automotive businesses do you work with?', answer: 'We work with dealerships, independent car shops, luxury brands, motorsport teams, performance shops, and sports/fitness brands. Whether you sell vehicles, modify them, or build a sports brand—we have proven strategies for your niche.' },
+          { question: 'How do you generate qualified leads for dealerships?', answer: 'We use a combination of high-intent targeting on Meta, Google, and TikTok, paired with scroll-stopping video creative and optimized landing pages. Our retargeting systems keep your brand top-of-mind until prospects are ready to buy.' },
+          { question: 'What kind of content do you produce?', answer: 'Everything from cinematic brand videos and social reels to ad creatives and event coverage. We handle the full production pipeline—scripting, filming, editing, and optimization for each platform.' },
+          { question: 'How soon can we expect results?', answer: 'Most automotive clients see measurable improvement in lead quality within 30 days. Significant ROI typically appears within 60-90 days as we optimize targeting, creative, and funnel performance.' },
+          { question: 'Do you handle social media management too?', answer: 'Yes. Our packages can include full social media management—content calendar, posting, community engagement, and performance reporting. We keep your brand active and growing on all platforms.' },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════
+          FINAL CTA — Video Background
+          ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#8B5CF6]/20 rounded-full blur-[150px]"
-          />
+          <LazyVideo src="/videos/aston-martin.mp4" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#0B0B0E]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -309,14 +510,19 @@ export default function AutomotiveSports() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-6xl font-bold text-[#F2F2F2] mb-6">
-              Ready to <span className="text-[#8B5CF6]">Accelerate</span>?
+              Ready to <span className="text-[#E5E5E5]">Accelerate</span>?
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 mb-12">
               Let's build a campaign that drives results, not just impressions
             </p>
-            <Button variant="primary" href="#contact">
-              Get a Performance Plan
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button variant="primary" href="#contact">
+                Get a Performance Plan
+              </Button>
+              <Button variant="secondary" href="#work">
+                View Our Work
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>

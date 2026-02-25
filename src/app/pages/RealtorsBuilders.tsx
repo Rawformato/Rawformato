@@ -1,18 +1,52 @@
+import { useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Target, 
-  Globe, 
+import {
+  Target,
+  Globe,
   Mail,
   Calendar,
   CheckCircle2,
   ArrowRight,
   Home,
   Shield,
-  TrendingUp
+  TrendingUp,
+  Users,
+  Zap,
+  Play
 } from 'lucide-react';
 import { Button } from '../components/Button';
+import { VideoCard } from '../components/VideoCard';
 import { ContactForm } from '../components/ContactForm';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { Testimonials } from '../components/Testimonials';
+import { Stats } from '../components/Stats';
+import { FAQ } from '../components/FAQ';
+
+/* ── Lazy video: play only when visible ── */
+function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    const video = videoRef.current;
+    if (!el || !video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { rootMargin: '200px', threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-full">
+      <video ref={videoRef} muted loop playsInline preload="none" src={src} className={className} />
+    </div>
+  );
+}
 
 export default function RealtorsBuilders() {
   const leadSystem = [
@@ -71,32 +105,48 @@ export default function RealtorsBuilders() {
     },
   ];
 
+  const showcaseVideos = [
+    { src: '/videos/architecture-recap.mp4', title: 'Rhino Homes Recap', category: 'Real Estate' },
+    { src: '/videos/wine-cellar.mp4', title: 'Wine Cellar Tour', category: 'Luxury Interior' },
+    { src: '/videos/rhino-openhouse.mp4', title: 'Open House Event', category: 'Property Tour' },
+    { src: '/videos/ro-projects.mp4', title: 'RO Projects Showcase', category: 'Architecture' },
+    { src: '/videos/rhino-day3.mp4', title: 'Construction Day 3', category: 'Builder Content' },
+    { src: '/videos/silver-ball.mp4', title: 'Lifestyle Showcase', category: 'Premium Lifestyle' },
+  ];
+
+  const reelVideos = [
+    '/videos/architecture-recap.mp4',
+    '/videos/wine-cellar.mp4',
+    '/videos/rhino-openhouse.mp4',
+    '/videos/ro-projects.mp4',
+    '/videos/rhino-day3.mp4',
+    '/videos/silver-ball.mp4',
+  ];
+
   return (
     <div className="relative">
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Hero Background Image */}
+      {/* ═══════════════════════════════════════
+          HERO — Cinematic Video Background
+          ═══════════════════════════════════════ */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden -mt-20 pt-20">
         <div className="absolute inset-0">
-          <ImageWithFallback 
-            src="https://images.unsplash.com/photo-1640109478916-f445f8f19b11?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsdXh1cnklMjBob21lJTIwaW50ZXJpb3J8ZW58MXx8fHwxNzcxMTg5MTM3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-            alt="Luxury Real Estate"
-            className="w-full h-full object-cover opacity-20"
+          <video
+            autoPlay muted loop playsInline preload="auto"
+            src="/videos/architecture-recap.mp4"
+            className="w-full h-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/80 via-[#0B0B0E]/90 to-[#0B0B0E]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0E]/40 via-transparent to-[#0B0B0E]/40" />
         </div>
+
+        {/* Vignette */}
+        <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 200px 40px rgba(11,11,14,0.5)' }} />
 
         <div className="absolute inset-0">
           <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#8B5CF6]/20 rounded-full blur-[100px]"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]"
           />
         </div>
 
@@ -107,18 +157,20 @@ export default function RealtorsBuilders() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 mb-8">
-              <Home size={16} className="text-[#8B5CF6]" />
-              <span className="text-sm text-[#8B5CF6]">Real Estate Marketing</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] backdrop-blur-xl border border-white/[0.1] mb-8">
+              <Home size={16} className="text-[#E5E5E5]" />
+              <span className="text-sm text-white/70 font-medium">Real Estate Marketing</span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#F2F2F2] mb-8 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
               Premium Leads for
               <br />
-              <span className="text-[#8B5CF6]">Premium Properties.</span>
+              <span className="bg-gradient-to-r from-white via-white/70 to-white/50 bg-clip-text text-transparent">
+                Premium Properties.
+              </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-[#F2F2F2]/70 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
               High-intent funnels, trust-first marketing, and automated systems that attract qualified buyers and sellers.
             </p>
 
@@ -126,15 +178,17 @@ export default function RealtorsBuilders() {
               <Button variant="primary" href="#contact">
                 Get Qualified Leads
               </Button>
-              <Button variant="secondary" href="#system">
-                See the System
+              <Button variant="secondary" href="#work">
+                See Our Work
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* ═══════════════════════════════════════
+          FEATURES
+          ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
@@ -144,7 +198,7 @@ export default function RealtorsBuilders() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-              Built for <span className="text-[#8B5CF6]">Real Estate Professionals</span>
+              Built for <span className="text-[#E5E5E5]">Real Estate Professionals</span>
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
               Marketing that matches the sophistication of your properties
@@ -155,29 +209,150 @@ export default function RealtorsBuilders() {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#8B5CF6]/50 transition-colors group"
+                transition={{ duration: 0.4 }}
+                className="group p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all"
               >
-                <div className="mb-6 inline-flex p-4 rounded-xl bg-[#8B5CF6]/10 text-[#8B5CF6] group-hover:scale-110 transition-transform">
+                <div className="mb-6 inline-flex p-4 rounded-xl bg-[#E5E5E5]/10 text-[#E5E5E5] group-hover:scale-110 transition-transform">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-[#F2F2F2] mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-[#F2F2F2]/60 leading-relaxed">
-                  {feature.description}
-                </p>
+                <h3 className="text-xl font-bold text-[#F2F2F2] mb-3">{feature.title}</h3>
+                <p className="text-[#F2F2F2]/60 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Lead System */}
-      <section id="system" className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#8B5CF6]/[0.02] to-transparent">
+      {/* ═══════════════════════════════════════
+          VIDEO PORTFOLIO — Hover-to-Play Grid
+          ═══════════════════════════════════════ */}
+      <section id="work" className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#E5E5E5]/[0.02] to-transparent">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-4">
+              Our Real Estate <span className="text-[#E5E5E5]">Portfolio</span>
+            </h2>
+            <p className="text-lg text-[#F2F2F2]/40 max-w-xl mx-auto">
+              Hover to preview. Premium marketing for premium properties.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+            {showcaseVideos.map((video, index) => (
+              <VideoCard
+                key={index}
+                src={video.src}
+                title={video.title}
+                category={video.category}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          VIDEO REEL — Horizontal Auto-Scroll
+          ═══════════════════════════════════════ */}
+      <section className="relative py-12 lg:py-20 overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <span className="text-[11px] text-white/25 uppercase tracking-[0.3em] font-medium">
+            Our Property Portfolio
+          </span>
+        </motion.div>
+
+        <div className="flex gap-4 md:gap-6 animate-scroll-reel">
+          {[...reelVideos, ...reelVideos, ...reelVideos].map((src, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-48 md:w-64 lg:w-72 aspect-[9/16] rounded-2xl overflow-hidden border border-white/[0.06] bg-[#111]"
+            >
+              <LazyVideo src={src} className="w-full h-full object-cover" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          FEATURED PROJECT — Spotlight
+          ═══════════════════════════════════════ */}
+      <section className="relative py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Video */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
+            >
+              <LazyVideo
+                src="/videos/rhino-openhouse.mp4"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl flex items-center justify-center border border-white/20">
+                  <Play size={24} className="text-white ml-1" fill="white" />
+                </div>
+              </div>
+              <div className="absolute bottom-6 left-6">
+                <div className="inline-flex px-3 py-1 rounded-full bg-[#E5E5E5]/90 text-[#0B0B0E] text-sm font-medium mb-2">
+                  Featured Project
+                </div>
+                <h3 className="text-2xl font-bold text-white">Rhino Homes Open House</h3>
+              </div>
+            </motion.div>
+
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#F2F2F2] mb-6">
+                Selling Homes Before They're <span className="text-[#E5E5E5]">Even Listed</span>
+              </h2>
+              <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
+                We created a full content strategy for Rhino Homes — cinematic property tours, drone footage, and targeted lead funnels that generated $890K in pipeline value in the first quarter.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
+                  <div className="text-3xl font-bold text-[#E5E5E5]">$890K</div>
+                  <div className="text-sm text-[#F2F2F2]/50">Pipeline value</div>
+                </div>
+                <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
+                  <div className="text-3xl font-bold text-[#E5E5E5]">147</div>
+                  <div className="text-sm text-[#F2F2F2]/50">Qualified leads in 60 days</div>
+                </div>
+              </div>
+              <Button variant="outline" href="#contact">
+                Get Similar Results
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          LEAD SYSTEM
+          ═══════════════════════════════════════ */}
+      <section id="system" className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#E5E5E5]/[0.02] to-transparent">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -186,7 +361,7 @@ export default function RealtorsBuilders() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-              The Complete <span className="text-[#8B5CF6]">Lead System</span>
+              The Complete <span className="text-[#E5E5E5]">Lead System</span>
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
               From first click to closed deal—a proven funnel that works 24/7
@@ -197,36 +372,25 @@ export default function RealtorsBuilders() {
             {leadSystem.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ duration: 0.4 }}
                 className="relative"
               >
-                {/* Arrow connector */}
                 {index < leadSystem.length - 1 && (
                   <div className="hidden lg:block absolute top-12 left-full w-full h-px">
-                    <div className="w-full h-full bg-gradient-to-r from-[#8B5CF6]/50 via-[#8B5CF6]/30 to-transparent" />
-                    <ArrowRight 
-                      size={20} 
-                      className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-2 text-[#8B5CF6]/50" 
-                    />
+                    <div className="w-full h-full bg-gradient-to-r from-[#E5E5E5]/50 via-[#E5E5E5]/30 to-transparent" />
+                    <ArrowRight size={20} className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-2 text-[#E5E5E5]/50" />
                   </div>
                 )}
-
-                <div className="p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#8B5CF6]/50 transition-colors h-full">
-                  <div className="mb-4 inline-flex p-3 rounded-lg bg-[#8B5CF6]/10 text-[#8B5CF6]">
+                <div className="p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-colors h-full">
+                  <div className="mb-4 inline-flex p-3 rounded-lg bg-[#E5E5E5]/10 text-[#E5E5E5]">
                     {item.icon}
                   </div>
-                  <div className="text-xs text-[#8B5CF6] font-semibold mb-2 uppercase tracking-wider">
-                    {item.step}
-                  </div>
-                  <h3 className="text-lg font-bold text-[#F2F2F2] mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-[#F2F2F2]/60 leading-relaxed">
-                    {item.description}
-                  </p>
+                  <div className="text-xs text-[#E5E5E5] font-semibold mb-2 uppercase tracking-wider">{item.step}</div>
+                  <h3 className="text-lg font-bold text-[#F2F2F2] mb-2">{item.title}</h3>
+                  <p className="text-sm text-[#F2F2F2]/60 leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -236,7 +400,7 @@ export default function RealtorsBuilders() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center p-8 rounded-2xl border border-[#8B5CF6]/30 bg-[#8B5CF6]/5"
+            className="text-center p-8 rounded-2xl border border-[#E5E5E5]/30 bg-[#E5E5E5]/5"
           >
             <h3 className="text-2xl font-bold text-[#F2F2F2] mb-3">
               Result: Qualified Appointments on Autopilot
@@ -251,7 +415,9 @@ export default function RealtorsBuilders() {
         </div>
       </section>
 
-      {/* Full Deliverables */}
+      {/* ═══════════════════════════════════════
+          DELIVERABLES
+          ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -263,7 +429,7 @@ export default function RealtorsBuilders() {
               <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
                 Full-Service Real Estate
                 <br />
-                <span className="text-[#8B5CF6]">Marketing</span>
+                <span className="text-[#E5E5E5]">Marketing</span>
               </h2>
               <p className="text-xl text-[#F2F2F2]/60 mb-8 leading-relaxed">
                 From lead generation to closing support, we provide everything you need to dominate your market.
@@ -280,81 +446,75 @@ export default function RealtorsBuilders() {
               className="space-y-4"
             >
               {deliverables.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="flex items-start gap-3 p-4 rounded-lg bg-[#F2F2F2]/[0.02] border border-white/5 hover:border-[#8B5CF6]/30 transition-colors"
+                  className="flex items-start gap-3 p-4 rounded-lg bg-[#F2F2F2]/[0.02] border border-white/5 hover:border-[#E5E5E5]/30 transition-colors"
                 >
-                  <CheckCircle2 size={20} className="text-[#8B5CF6] mt-0.5 shrink-0" />
+                  <CheckCircle2 size={20} className="text-[#E5E5E5] mt-0.5 shrink-0" />
                   <span className="text-[#F2F2F2]">{item}</span>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="relative py-24 lg:py-32 bg-gradient-to-b from-transparent via-[#8B5CF6]/[0.02] to-transparent">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-              Real Results for <span className="text-[#8B5CF6]">Real Estate Pros</span>
-            </h2>
-          </motion.div>
+      {/* Stats */}
+      <Stats
+        title={<>Real Results for <span className="text-[#E5E5E5]">Real Estate Pros</span></>}
+        subtitle="Numbers from our real estate marketing campaigns"
+        stats={[
+          { value: '$890K', label: 'Pipeline Value', sublabel: 'Generated in 90 days', icon: <TrendingUp size={28} /> },
+          { value: '147', label: 'Qualified Leads', sublabel: 'In first 60 days', icon: <Target size={28} /> },
+          { value: '4.8x', label: 'ROI on Ad Spend', sublabel: 'Builder partnership', icon: <Zap size={28} /> },
+          { value: '28%', label: 'Conversion Rate', sublabel: 'Landing pages', icon: <Users size={28} /> },
+        ]}
+      />
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { metric: '$890K', label: 'Pipeline Value Generated', desc: 'Luxury property campaign' },
-              { metric: '147', label: 'Qualified Leads', desc: 'In first 60 days' },
-              { metric: '4.8x', label: 'ROI on Ad Spend', desc: 'Builder partnership campaign' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#8B5CF6]/50 transition-colors"
-              >
-                <div className="text-5xl font-bold text-[#8B5CF6] mb-3">
-                  {stat.metric}
-                </div>
-                <div className="text-xl font-semibold text-[#F2F2F2] mb-2">
-                  {stat.label}
-                </div>
-                <div className="text-sm text-[#F2F2F2]/60">
-                  {stat.desc}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Testimonials */}
+      <Testimonials
+        testimonials={[
+          {
+            name: 'David Chen', role: 'Realtor', company: 'Luxury Properties Miami',
+            image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop',
+            content: 'Finally, a marketing agency that understands real estate. The leads are high-quality, and the automated follow-up system is brilliant.',
+            rating: 5,
+          },
+          {
+            name: 'Rachel Thompson', role: 'Broker Associate', company: 'Coastal Realty Group',
+            image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop',
+            content: 'RAW Formato\'s landing pages are converting at 28%—way above industry average. My pipeline has never been stronger.',
+            rating: 5,
+          },
+          {
+            name: 'James Morrison', role: 'Owner', company: 'Morrison Custom Homes',
+            image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop',
+            content: 'We sold out our latest development 4 months ahead of schedule. Their targeting brought us exactly the buyers we needed.',
+            rating: 5,
+          },
+        ]}
+      />
 
-      {/* Final CTA */}
+      {/* FAQ */}
+      <FAQ
+        title={<>Real Estate Marketing <span className="text-[#E5E5E5]">FAQ</span></>}
+        items={[
+          { question: 'Do you work with individual realtors or just brokerages?', answer: 'Both! We work with individual agents, teams, brokerages, and custom home builders. Our packages scale to fit your business, whether you are a solo agent or running a multi-location firm.' },
+          { question: 'How do you generate qualified real estate leads?', answer: 'We build complete lead funnels: targeted ads on Meta and Google that drive traffic to high-converting landing pages, followed by automated email/SMS nurture sequences. Our advanced targeting focuses on high-intent buyers and sellers in your specific market.' },
+          { question: 'What kind of content do you create for real estate?', answer: 'We produce cinematic property tours, aerial drone footage, agent branding content, neighborhood showcase videos, open house coverage, and social media content designed to build trust and authority in your market.' },
+          { question: 'Can you integrate with my existing CRM?', answer: 'Yes. We integrate with all major real estate CRMs including Follow Up Boss, KvCORE, Sierra Interactive, and more. Leads flow directly into your system with automated tagging and follow-up sequences.' },
+          { question: 'How long before I start seeing qualified leads?', answer: 'Most real estate clients start receiving leads within the first 1-2 weeks of campaign launch. Quality leads that convert to appointments typically ramp up within 30-60 days as we optimize targeting and messaging.' },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════
+          FINAL CTA — Video Background
+          ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#8B5CF6]/20 rounded-full blur-[150px]"
-          />
+          <LazyVideo src="/videos/silver-ball.mp4" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#0B0B0E]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -364,14 +524,19 @@ export default function RealtorsBuilders() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-6xl font-bold text-[#F2F2F2] mb-6">
-              Ready to <span className="text-[#8B5CF6]">Close More Deals</span>?
+              Ready to <span className="text-[#E5E5E5]">Close More Deals</span>?
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 mb-12">
               Let's build a lead system that fills your pipeline with qualified opportunities
             </p>
-            <Button variant="primary" href="#contact">
-              Get Qualified Leads
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button variant="primary" href="#contact">
+                Get Qualified Leads
+              </Button>
+              <Button variant="secondary" href="#work">
+                See Our Work
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>

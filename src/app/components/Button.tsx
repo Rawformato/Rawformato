@@ -13,25 +13,34 @@ export function Button({ children, variant = 'primary', href, onClick, className
   const baseStyles = 'group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-medium transition-all overflow-hidden';
   
   const variants = {
-    primary: 'bg-[#8B5CF6] text-[#F2F2F2] hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]',
+    primary: 'bg-[#E5E5E5] text-[#0B0B0E] hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]',
     secondary: 'bg-[#F2F2F2]/5 text-[#F2F2F2] border border-white/10 hover:bg-[#F2F2F2]/10 hover:border-white/20',
-    outline: 'border border-[#8B5CF6]/50 text-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]',
+    outline: 'border border-[#E5E5E5]/50 text-[#E5E5E5] hover:bg-[#E5E5E5]/10 hover:border-[#E5E5E5]',
   };
 
-  const Component = motion.a;
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        onClick={onClick}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className={`${baseStyles} ${variants[variant]} ${className}`}
+      >
+        <span className="relative z-10">{children}</span>
+      </motion.a>
+    );
+  }
 
   return (
-    <Component
-      href={href}
+    <motion.button
+      type="button"
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={`${baseStyles} ${variants[variant]} ${className}`}
     >
       <span className="relative z-10">{children}</span>
-      {variant === 'primary' && (
-        <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] opacity-0 group-hover:opacity-100 transition-opacity" />
-      )}
-    </Component>
+    </motion.button>
   );
 }
