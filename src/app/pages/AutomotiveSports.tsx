@@ -96,23 +96,23 @@ export default function AutomotiveSports() {
   ];
 
   const showcaseVideos = [
-    { src: '/videos/auto-teaser.mp4', title: 'Auto Teaser', category: 'Automotive' },
-    { src: '/videos/mimessi-cafe.mp4', title: 'Mimessi Collection', category: 'Luxury Cars' },
-    { src: '/videos/mfk-dyno.mp4', title: 'MFK Performance', category: 'Performance' },
-    { src: '/videos/aston-martin.mp4', title: 'Aston Martin Showcase', category: 'Luxury Cars' },
-    { src: '/videos/moto-aprilia.mp4', title: 'Aprilia Showcase', category: 'Motorsport' },
-    { src: '/videos/hayabusa.mp4', title: 'Hayabusa', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4', title: 'Auto Teaser', category: 'Automotive' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055635/mimessi-cafe_l96sa2.mp4', title: 'Mimessi Collection', category: 'Luxury Cars' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4', title: 'MFK Performance', category: 'Performance' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4', title: 'Aston Martin Showcase', category: 'Luxury Cars' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Aprilia Showcase', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055517/hayabusa_oejqzh.mp4', title: 'Hayabusa', category: 'Motorsport' },
   ];
 
   const reelVideos = [
-    '/videos/auto-teaser.mp4',
-    '/videos/mfk-dyno.mp4',
-    '/videos/moto-aprilia.mp4',
-    '/videos/aston-martin.mp4',
-    '/videos/hayabusa.mp4',
-    '/videos/showtime-meza.mp4',
-    '/videos/gym-workout.mp4',
-    '/videos/karate-academy.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055517/hayabusa_oejqzh.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055656/showtime-meza_yjow9q.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055519/gym-workout_klk7vd.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055622/karate-academy_pwj9p4.mp4',
   ];
 
   return (
@@ -124,7 +124,7 @@ export default function AutomotiveSports() {
         <div className="absolute inset-0">
           <video
             autoPlay muted loop playsInline preload="auto"
-            src="/videos/auto-teaser.mp4"
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
@@ -299,7 +299,7 @@ export default function AutomotiveSports() {
               className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
             >
               <LazyVideo
-                src="/videos/mfk-dyno.mp4"
+                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
@@ -498,7 +498,7 @@ export default function AutomotiveSports() {
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <LazyVideo src="/videos/aston-martin.mp4" className="w-full h-full object-cover" />
+          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0B0B0E]/80" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>

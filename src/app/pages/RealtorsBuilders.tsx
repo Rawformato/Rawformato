@@ -106,21 +106,21 @@ export default function RealtorsBuilders() {
   ];
 
   const showcaseVideos = [
-    { src: '/videos/architecture-recap.mp4', title: 'Rhino Homes Recap', category: 'Real Estate' },
-    { src: '/videos/wine-cellar.mp4', title: 'Wine Cellar Tour', category: 'Luxury Interior' },
-    { src: '/videos/rhino-openhouse.mp4', title: 'Open House Event', category: 'Property Tour' },
-    { src: '/videos/ro-projects.mp4', title: 'RO Projects Showcase', category: 'Architecture' },
-    { src: '/videos/rhino-day3.mp4', title: 'Construction Day 3', category: 'Builder Content' },
-    { src: '/videos/silver-ball.mp4', title: 'Lifestyle Showcase', category: 'Premium Lifestyle' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Rhino Homes Recap', category: 'Real Estate' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4', title: 'Wine Cellar Tour', category: 'Luxury Interior' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4', title: 'Open House Event', category: 'Property Tour' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/ro-projects_xdfqzt.mp4', title: 'RO Projects Showcase', category: 'Architecture' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/rhino-day3_izyknf.mp4', title: 'Construction Day 3', category: 'Builder Content' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4', title: 'Lifestyle Showcase', category: 'Premium Lifestyle' },
   ];
 
   const reelVideos = [
-    '/videos/architecture-recap.mp4',
-    '/videos/wine-cellar.mp4',
-    '/videos/rhino-openhouse.mp4',
-    '/videos/ro-projects.mp4',
-    '/videos/rhino-day3.mp4',
-    '/videos/silver-ball.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/ro-projects_xdfqzt.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/rhino-day3_izyknf.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4',
   ];
 
   return (
@@ -132,7 +132,7 @@ export default function RealtorsBuilders() {
         <div className="absolute inset-0">
           <video
             autoPlay muted loop playsInline preload="auto"
-            src="/videos/architecture-recap.mp4"
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
@@ -302,7 +302,7 @@ export default function RealtorsBuilders() {
               className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
             >
               <LazyVideo
-                src="/videos/rhino-openhouse.mp4"
+                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
@@ -512,7 +512,7 @@ export default function RealtorsBuilders() {
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <LazyVideo src="/videos/silver-ball.mp4" className="w-full h-full object-cover" />
+          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0B0B0E]/80" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>
