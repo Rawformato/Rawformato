@@ -153,40 +153,40 @@ export default function Home() {
       industry: 'Automotive',
       outcome: '240% increase in qualified leads',
       description: 'Performance campaign for luxury automotive brand',
-      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4',
+      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
     },
     {
       industry: 'Restaurant',
       outcome: '4.2M impressions in 90 days',
       description: 'Viral content strategy for restaurant group',
-      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4',
+      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
     },
     {
       industry: 'Real Estate',
       outcome: '$890K in pipeline value',
       description: 'Premium lead funnel for luxury properties',
-      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4',
+      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4',
     },
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/food-crave_nbwtba.mp4', title: 'Crave-Worthy Content', category: 'Food & Beverage' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4', title: 'Prestige Creations', category: 'Automotive' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Architecture Recap', category: 'Real Estate' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055519/gym-workout_klk7vd.mp4', title: 'Strength & Power', category: 'Fitness' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4', title: 'Crave-Worthy Content', category: 'Food & Beverage' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Prestige Creations', category: 'Automotive' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4', title: 'Architecture Recap', category: 'Real Estate' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492961/POV_A_la_Cruz_6_u1l0au.mp4', title: 'Strength & Power', category: 'Fitness' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
   ];
 
   const reelVideos = [
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055519/gym-workout_klk7vd.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/food-crave_nbwtba.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492961/POV_A_la_Cruz_6_u1l0au.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4',
   ];
 
   /* ── Render ────────────────────────────── */
@@ -682,7 +682,7 @@ export default function Home() {
         {/* Video background — lazy loaded */}
         <div className="absolute inset-0">
           <LazyVideo
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4"
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-[#0B0B0E]/85" />

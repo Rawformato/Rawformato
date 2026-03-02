@@ -107,21 +107,21 @@ export default function RealtorsBuilders() {
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Architecture Recap', category: 'Real Estate' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4', title: 'Wine Cellar Tour', category: 'Luxury Interior' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4', title: 'Open House Event', category: 'Property Tour' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/ro-projects_xdfqzt.mp4', title: 'Architecture Showcase', category: 'Architecture' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/rhino-day3_izyknf.mp4', title: 'Construction Day 3', category: 'Builder Content' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4', title: 'Lifestyle Showcase', category: 'Premium Lifestyle' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4', title: 'Architecture Recap', category: 'Real Estate' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4', title: 'Wine Cellar Tour', category: 'Luxury Interior' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492920/Rhino_Homes_Open_House_wljx7d.mp4', title: 'Open House Event', category: 'Property Tour' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/RO_Projects_Nov22_tndjsp.mp4', title: 'Architecture Showcase', category: 'Architecture' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492929/Rhino_Homes_D%C3%ADa_3_bigcmg.mp4', title: 'Construction Day 3', category: 'Builder Content' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4', title: 'Lifestyle Showcase', category: 'Premium Lifestyle' },
   ];
 
   const reelVideos = [
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/ro-projects_xdfqzt.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/rhino-day3_izyknf.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492920/Rhino_Homes_Open_House_wljx7d.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/RO_Projects_Nov22_tndjsp.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492929/Rhino_Homes_D%C3%ADa_3_bigcmg.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4',
   ];
 
   return (
@@ -133,7 +133,7 @@ export default function RealtorsBuilders() {
         <div className="absolute inset-0">
           <video
             autoPlay muted loop playsInline preload="auto"
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4"
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
@@ -319,7 +319,7 @@ export default function RealtorsBuilders() {
               className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
             >
               <LazyVideo
-                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4"
+                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492920/Rhino_Homes_Open_House_wljx7d.mp4"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
@@ -529,7 +529,7 @@ export default function RealtorsBuilders() {
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4" className="w-full h-full object-cover" />
+          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0B0B0E]/80" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>

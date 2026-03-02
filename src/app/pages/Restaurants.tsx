@@ -68,23 +68,23 @@ export default function Restaurants() {
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4', title: 'Fine Dining Experience', category: 'Fine Dining' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055617/inka-copa_xekyfl.mp4', title: 'Cocktail Bar Vibes', category: 'Bar & Lounge' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/alacruz-asmr_zyywqf.mp4', title: 'Gastronomy ASMR', category: 'Gastronomy' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055515/elatico-trendy_pyr7vh.mp4', title: 'Rooftop Vibes', category: 'Rooftop Bar' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055661/victorias-pisco_vsocuc.mp4', title: 'Pisco Lounge', category: 'Cocktails' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4', title: 'Fine Dining Experience', category: 'Fine Dining' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492920/Copa_f8ew7k.mp4', title: 'Cocktail Bar Vibes', category: 'Bar & Lounge' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/ASMR_A_la_Cruz_x239ex.mp4', title: 'Gastronomy ASMR', category: 'Gastronomy' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/El_Atico_Trendy_zweya8.mp4', title: 'Rooftop Vibes', category: 'Rooftop Bar' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492929/Pisco_Lounge_b91qse.mp4', title: 'Pisco Lounge', category: 'Cocktails' },
   ];
 
   const reelVideos = [
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/food-crave_nbwtba.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055617/inka-copa_xekyfl.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/alacruz-asmr_zyywqf.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055515/elatico-trendy_pyr7vh.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055661/victorias-pisco_vsocuc.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492920/Copa_f8ew7k.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/ASMR_A_la_Cruz_x239ex.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/El_Atico_Trendy_zweya8.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492929/Pisco_Lounge_b91qse.mp4',
   ];
 
   return (
@@ -96,7 +96,7 @@ export default function Restaurants() {
         <div className="absolute inset-0">
           <video
             autoPlay muted loop playsInline preload="auto"
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4"
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
@@ -301,7 +301,7 @@ export default function Restaurants() {
               className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
             >
               <LazyVideo
-                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4"
+                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
@@ -507,7 +507,7 @@ export default function Restaurants() {
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4" className="w-full h-full object-cover" />
+          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0B0B0E]/80" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>

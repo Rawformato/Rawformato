@@ -97,23 +97,23 @@ export default function AutomotiveSports() {
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4', title: 'Auto Teaser', category: 'Automotive' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055635/mimessi-cafe_l96sa2.mp4', title: 'Luxury Collection', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4', title: 'Dyno Day', category: 'Performance' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4', title: 'Luxury Showcase', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055517/hayabusa_oejqzh.mp4', title: 'Speed Unleashed', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Prestige Teaser', category: 'Automotive' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/Mimessi_Carro_Caf%C3%A9_jtigoh.mp4', title: 'Luxury Collection', category: 'Luxury Cars' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4', title: 'Auto Rojo MFK', category: 'Performance' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4', title: 'Luxury Showcase', category: 'Luxury Cars' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Hayabusa_radq7o.mp4', title: 'Speed Unleashed', category: 'Motorsport' },
   ];
 
   const reelVideos = [
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055517/hayabusa_oejqzh.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055656/showtime-meza_yjow9q.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055519/gym-workout_klk7vd.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055622/karate-academy_pwj9p4.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Hayabusa_radq7o.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Auto_Rojo_MFK_lagwde.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492961/POV_A_la_Cruz_6_u1l0au.mp4',
   ];
 
   return (
@@ -125,7 +125,7 @@ export default function AutomotiveSports() {
         <div className="absolute inset-0">
           <video
             autoPlay muted loop playsInline preload="auto"
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4"
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
@@ -323,7 +323,7 @@ export default function AutomotiveSports() {
               className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
             >
               <LazyVideo
-                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4"
+                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
@@ -522,7 +522,7 @@ export default function AutomotiveSports() {
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4" className="w-full h-full object-cover" />
+          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0B0B0E]/80" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>
