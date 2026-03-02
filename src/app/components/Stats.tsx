@@ -16,7 +16,7 @@ interface StatsProps {
 
 const defaultStats: Stat[] = [
   {
-    value: '312%',
+    value: '190%',
     label: 'Average ROI',
     sublabel: 'First 90 days',
     icon: <TrendingUp size={28} />,
@@ -34,7 +34,7 @@ const defaultStats: Stat[] = [
     icon: <Zap size={28} />,
   },
   {
-    value: '4,200+',
+    value: '240%',
     label: 'Qualified Leads',
     sublabel: 'Delivered in 2024',
     icon: <Target size={28} />,
@@ -44,19 +44,10 @@ const defaultStats: Stat[] = [
 export function Stats({ stats = defaultStats, title, subtitle }: StatsProps) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background gradient */}
+      {/* Background gradient — static for performance */}
       <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#E5E5E5]/20 rounded-full blur-[150px]"
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#E5E5E5]/15 rounded-full blur-[150px]"
         />
       </div>
 

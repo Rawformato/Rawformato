@@ -94,7 +94,8 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-[#F2F2F2] p-2"
+            className="lg:hidden text-[#F2F2F2] p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -106,7 +107,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-white/10 py-4"
+            className="lg:hidden border-t border-white/10 py-4 bg-[#0B0B0E]/95 backdrop-blur-lg"
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (

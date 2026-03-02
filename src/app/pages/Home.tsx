@@ -26,6 +26,7 @@ import { ContactForm } from '../components/ContactForm';
 import { Testimonials } from '../components/Testimonials';
 import { FAQ } from '../components/FAQ';
 import { Stats } from '../components/Stats';
+import { PhotoGallery } from '../components/PhotoGallery';
 
 /* ────────────────────────────────────────────────
    useLazyVideo — play video only when visible
@@ -150,7 +151,7 @@ export default function Home() {
   const caseStudies = [
     {
       industry: 'Automotive',
-      outcome: '312% increase in qualified leads',
+      outcome: '240% increase in qualified leads',
       description: 'Performance campaign for luxury automotive brand',
       video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4',
     },
@@ -172,9 +173,9 @@ export default function Home() {
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/food-crave_nbwtba.mp4', title: 'Crave-Worthy Content', category: 'Food & Beverage' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4', title: 'Prestige Creations', category: 'Automotive' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Rhino Homes Recap', category: 'Real Estate' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Architecture Recap', category: 'Real Estate' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055519/gym-workout_klk7vd.mp4', title: 'Strength & Power', category: 'Fitness' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Aprilia Showcase', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
   ];
 
   const reelVideos = [
@@ -199,16 +200,22 @@ export default function Home() {
         ref={heroRef}
         className="relative h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20"
       >
-        {/* Background Video */}
-        <div className="absolute inset-0" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
+        {/* Background Video — optimized quality per device */}
+        <div className="absolute inset-0" style={{ transform: 'translateZ(0)' }}>
           <video
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
           >
+            {/* Mobile: lower quality for bandwidth */}
+            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/q_auto,w_720/v1772055622/hero_snlduv.webm" type="video/webm" media="(max-width: 768px)" />
+            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/q_auto,w_720/v1772055615/hero_rxmpqm.mp4" type="video/mp4" media="(max-width: 768px)" />
+            {/* Desktop: full quality */}
             <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055622/hero_snlduv.webm" type="video/webm" />
+            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055615/hero_rxmpqm.mp4" type="video/mp4" />
             <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055615/hero_rxmpqm.mov" type="video/quicktime" />
           </video>
         </div>
@@ -233,8 +240,8 @@ export default function Home() {
         >
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.06] backdrop-blur-xl border border-white/[0.1] mb-10"
           >
@@ -250,7 +257,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2.8rem,8vw,6rem)] font-bold text-white leading-[0.95] tracking-[-0.03em] mb-8"
+              className="text-[clamp(2.5rem,8vw,6rem)] font-bold text-white leading-[1.05] tracking-[-0.03em] mb-8"
             >
               Creative Marketing
               <br />
@@ -265,9 +272,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="text-lg md:text-xl text-white/45 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
+            className="text-base md:text-xl text-white/45 max-w-2xl mx-auto mb-12 leading-relaxed font-light px-2"
           >
-            We turn brands into movements through scroll-stopping content
+            We turn brands into movements through scroll-stopping content{" "}
             <br className="hidden md:block" />
             and AI-powered performance marketing
           </motion.p>
@@ -383,7 +390,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
-              Industries We <span className="text-[#E5E5E5]">Dominate</span>
+              Industries We <span className="text-[#E5E5E5]">Specialize In</span>
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
               Specialized strategies for businesses that demand results
@@ -400,7 +407,7 @@ export default function Home() {
               <IndustryCard
                 icon={<Car size={40} />}
                 title="Automotive & Sports"
-                description="High-octane campaigns for dealerships, car clubs, and sports brands. Drive qualified leads and build brand loyalty."
+                description="High-octane campaigns for dealerships, car clubs, and sports brands that drive qualified leads and build brand loyalty."
                 link="/automotive-sports"
               />
             </motion.div>
@@ -435,6 +442,33 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          PHOTOGRAPHY PORTFOLIO — Best of All Categories
+          ═══════════════════════════════════════════════════════ */}
+      <PhotoGallery
+        title={<>Photography <span className="text-[#E5E5E5]">Portfolio</span></>}
+        subtitle="Professional photography that elevates every brand"
+        columns={4}
+        photos={[
+          { src: '/photos/restaurants/grilled-steak.jpg', alt: 'Grilled steak with chimichurri' },
+          { src: '/photos/automotive/sports-car.jpg', alt: 'Sports car in motion' },
+          { src: '/photos/realestate/pool-evening.jpg', alt: 'Luxury pool at twilight' },
+          { src: '/photos/restaurants/smoky-cocktail.png', alt: 'Smoky old fashioned cocktail' },
+          { src: '/photos/automotive/moto-racing-1.jpg', alt: 'Motorcycle track racing' },
+          { src: '/photos/restaurants/sushi-roll.png', alt: 'Sushi roll presentation' },
+          { src: '/photos/realestate/wine-cellar.png', alt: 'Luxury wine cellar' },
+          { src: '/photos/restaurants/latte-art.jpg', alt: 'Latte art pour' },
+          { src: '/photos/automotive/carbon-detail.jpg', alt: 'Carbon fiber detail' },
+          { src: '/photos/restaurants/causa-peruvian.png', alt: 'Peruvian causa' },
+          { src: '/photos/realestate/modern-interior.png', alt: 'Modern glass interior' },
+          { src: '/photos/fitness/training-session.jpg', alt: 'Athletic training' },
+          { src: '/photos/restaurants/espresso-martini.png', alt: 'Espresso martini' },
+          { src: '/photos/automotive/classic-interior.jpg', alt: 'Classic car interior' },
+          { src: '/photos/restaurants/affogato-dessert.jpg', alt: 'Affogato dessert' },
+          { src: '/photos/lifestyle/beach-sunset.jpg', alt: 'Beach lifestyle shoot' },
+        ]}
+      />
 
       {/* ═══════════════════════════════════════════════════════
           SERVICES GRID
@@ -651,8 +685,8 @@ export default function Home() {
             src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-[#0B0B0E]/80" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
+          <div className="absolute inset-0 bg-[#0B0B0E]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-[#0B0B0E]/60 to-[#0B0B0E]" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -663,7 +697,7 @@ export default function Home() {
           >
             <h2 className="text-4xl lg:text-6xl font-bold text-[#F2F2F2] mb-6">
               Ready to Scale with <br />
-              <span className="text-[#E5E5E5]">Creative + AI</span>?
+              <span className="text-[#E5E5E5]">Creative Strategy + AI</span>?
             </h2>
             <p className="text-xl text-[#F2F2F2]/60 mb-12 max-w-2xl mx-auto">
               Let's build a marketing system that works while you sleep

@@ -17,25 +17,25 @@ interface TestimonialsProps {
 
 const defaultTestimonials: Testimonial[] = [
   {
-    name: 'Michael Rodriguez',
+    name: 'Michael R.',
     role: 'Owner',
-    company: 'Elite Auto Group',
+    company: 'Automotive Dealership',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
     content: 'RAW Formato transformed our digital presence. We went from struggling to get leads to having a waiting list. Their AI-powered creative testing is game-changing.',
     rating: 5,
   },
   {
-    name: 'Sofia Martinez',
+    name: 'Sofia M.',
     role: 'Marketing Director',
-    company: 'Coastal Dining Group',
+    company: 'Restaurant Group',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
     content: 'The content they produce is absolutely stunning. Our reservations increased 38% in the first 60 days. Best investment we\'ve made.',
     rating: 5,
   },
   {
-    name: 'David Chen',
+    name: 'David C.',
     role: 'Realtor',
-    company: 'Luxury Properties Miami',
+    company: 'Luxury Real Estate',
     image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop',
     content: 'Finally, a marketing agency that understands real estate. The leads are high-quality, and the automated follow-up system is brilliant.',
     rating: 5,

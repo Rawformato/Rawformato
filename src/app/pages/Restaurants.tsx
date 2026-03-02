@@ -18,6 +18,7 @@ import { ContactForm } from '../components/ContactForm';
 import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
+import { PhotoGallery } from '../components/PhotoGallery';
 
 /* ── Lazy video: play only when visible ── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
@@ -68,11 +69,11 @@ export default function Restaurants() {
 
   const showcaseVideos = [
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055513/fire-senses_nnwalb.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4', title: "DeLuca's Restaurant", category: 'Fine Dining' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055617/inka-copa_xekyfl.mp4', title: 'INKA Cocktail Bar', category: 'Bar & Lounge' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/alacruz-asmr_zyywqf.mp4', title: 'A la Cruz ASMR', category: 'Gastronomy' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055515/elatico-trendy_pyr7vh.mp4', title: 'El Atico Trendy', category: 'Rooftop Bar' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055661/victorias-pisco_vsocuc.mp4', title: "Victoria's Pisco Lounge", category: 'Cocktails' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/delucas-restaurant_nlmlol.mp4', title: 'Fine Dining Experience', category: 'Fine Dining' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055617/inka-copa_xekyfl.mp4', title: 'Cocktail Bar Vibes', category: 'Bar & Lounge' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055392/alacruz-asmr_zyywqf.mp4', title: 'Gastronomy ASMR', category: 'Gastronomy' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055515/elatico-trendy_pyr7vh.mp4', title: 'Rooftop Vibes', category: 'Rooftop Bar' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055661/victorias-pisco_vsocuc.mp4', title: 'Pisco Lounge', category: 'Cocktails' },
   ];
 
   const reelVideos = [
@@ -106,11 +107,7 @@ export default function Restaurants() {
         <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 200px 40px rgba(11,11,14,0.5)' }} />
 
         <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]"
-          />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32">
@@ -257,6 +254,40 @@ export default function Restaurants() {
       </section>
 
       {/* ═══════════════════════════════════════
+          PHOTOGRAPHY PORTFOLIO
+          ═══════════════════════════════════════ */}
+      <PhotoGallery
+        title={<>Our Food <span className="text-[#E5E5E5]">Photography</span></>}
+        subtitle="Every dish deserves to be captured at its best"
+        photos={[
+          { src: '/photos/restaurants/grilled-steak.jpg', alt: 'Grilled steak with chimichurri' },
+          { src: '/photos/restaurants/smoky-cocktail.png', alt: 'Smoky old fashioned cocktail' },
+          { src: '/photos/restaurants/sushi-roll.png', alt: 'Sushi roll with flower garnish' },
+          { src: '/photos/restaurants/burrata-prosciutto.png', alt: 'Burrata with prosciutto' },
+          { src: '/photos/restaurants/latte-art.jpg', alt: 'Latte art pour' },
+          { src: '/photos/restaurants/causa-peruvian.png', alt: 'Peruvian causa dish' },
+          { src: '/photos/restaurants/smash-burger.png', alt: 'Flaming smash burger' },
+          { src: '/photos/restaurants/pisco-sour.jpg', alt: 'Pisco sour cocktail' },
+          { src: '/photos/restaurants/seafood-platter.png', alt: 'Grilled seafood platter' },
+          { src: '/photos/restaurants/espresso-martini.png', alt: 'Espresso martini' },
+          { src: '/photos/restaurants/pasta-tomato.png', alt: 'Spaghetti with tomato sauce' },
+          { src: '/photos/restaurants/affogato-dessert.jpg', alt: 'Affogato dessert' },
+          { src: '/photos/restaurants/spicy-cocktail.jpg', alt: 'Spicy cocktail with garnish' },
+          { src: '/photos/restaurants/shrimp-rice.png', alt: 'Shrimp with rice and plantains' },
+          { src: '/photos/restaurants/gelato-scoop.png', alt: 'Artisan gelato' },
+          { src: '/photos/restaurants/burrata-landscape.png', alt: 'Burrata plating' },
+          { src: '/photos/restaurants/sangria-cocktails.png', alt: 'Sangria cocktails' },
+          { src: '/photos/restaurants/gnocchi.png', alt: 'Gnocchi in butter sauce' },
+          { src: '/photos/restaurants/hot-chocolate.png', alt: 'Artisan hot chocolate' },
+          { src: '/photos/restaurants/calamari-rings.png', alt: 'Crispy calamari rings' },
+          { src: '/photos/restaurants/samosas.png', alt: 'Samosas with chili sauce' },
+          { src: '/photos/restaurants/milanesa-sandwich.png', alt: 'Milanesa with mashed potatoes' },
+          { src: '/photos/restaurants/shrimp-patacones.png', alt: 'Shrimp with patacones' },
+          { src: '/photos/restaurants/burrata-closeup.png', alt: 'Burrata closeup' },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════
           FEATURED PROJECT — Spotlight
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32">
@@ -283,7 +314,7 @@ export default function Restaurants() {
                 <div className="inline-flex px-3 py-1 rounded-full bg-[#E5E5E5]/90 text-[#0B0B0E] text-sm font-medium mb-2">
                   Featured Project
                 </div>
-                <h3 className="text-2xl font-bold text-white">DeLuca's Restaurant</h3>
+                <h3 className="text-2xl font-bold text-white">Fine Dining Campaign</h3>
               </div>
             </motion.div>
 
@@ -297,7 +328,7 @@ export default function Restaurants() {
                 From Empty Tables to <span className="text-[#E5E5E5]">Fully Booked</span>
               </h2>
               <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
-                We created a content engine for DeLuca's — cinematic reels, ASMR food content, and hyper-local ad campaigns that turned scrollers into diners in under 60 days.
+                We created a content engine — cinematic reels, ASMR food content, and hyper-local ad campaigns that turned scrollers into diners in under 60 days.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
@@ -439,19 +470,19 @@ export default function Restaurants() {
       <Testimonials
         testimonials={[
           {
-            name: 'Sofia Martinez', role: 'Marketing Director', company: 'Coastal Dining Group',
+            name: 'Sofia M.', role: 'Marketing Director', company: 'Restaurant Group',
             image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
             content: 'The content they produce is absolutely stunning. Our reservations increased 38% in the first 60 days. Best investment we\'ve made.',
             rating: 5,
           },
           {
-            name: 'Marco Rossini', role: 'Owner & Chef', company: 'Rossini\'s Trattoria',
+            name: 'Marco R.', role: 'Owner & Chef', company: 'Italian Restaurant',
             image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop',
             content: 'RAW Formato understands hospitality. They capture the soul of our restaurant in every post, every ad. Our social media went from 200 to 12,000 followers.',
             rating: 5,
           },
           {
-            name: 'Amanda Chen', role: 'General Manager', company: 'Fusion Kitchen',
+            name: 'Amanda C.', role: 'General Manager', company: 'Fusion Restaurant',
             image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop',
             content: 'We used to struggle filling weeknight tables. Now we\'re fully booked Tuesday through Saturday. Their local ad targeting is incredible.',
             rating: 5,

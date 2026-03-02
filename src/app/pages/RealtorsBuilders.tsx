@@ -20,6 +20,7 @@ import { ContactForm } from '../components/ContactForm';
 import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
+import { PhotoGallery } from '../components/PhotoGallery';
 
 /* ── Lazy video: play only when visible ── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
@@ -106,10 +107,10 @@ export default function RealtorsBuilders() {
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Rhino Homes Recap', category: 'Real Estate' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/architecture-recap_mpofdd.mp4', title: 'Architecture Recap', category: 'Real Estate' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055659/wine-cellar_cl3kpc.mp4', title: 'Wine Cellar Tour', category: 'Luxury Interior' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/rhino-openhouse_m5whkl.mp4', title: 'Open House Event', category: 'Property Tour' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/ro-projects_xdfqzt.mp4', title: 'RO Projects Showcase', category: 'Architecture' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/ro-projects_xdfqzt.mp4', title: 'Architecture Showcase', category: 'Architecture' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055637/rhino-day3_izyknf.mp4', title: 'Construction Day 3', category: 'Builder Content' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055658/silver-ball_fy745l.mp4', title: 'Lifestyle Showcase', category: 'Premium Lifestyle' },
   ];
@@ -143,11 +144,7 @@ export default function RealtorsBuilders() {
         <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 200px 40px rgba(11,11,14,0.5)' }} />
 
         <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]"
-          />
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32">
@@ -289,6 +286,26 @@ export default function RealtorsBuilders() {
       </section>
 
       {/* ═══════════════════════════════════════
+          PROPERTY PHOTOGRAPHY
+          ═══════════════════════════════════════ */}
+      <PhotoGallery
+        title={<>Property <span className="text-[#E5E5E5]">Photography</span></>}
+        subtitle="Showcasing spaces that inspire and sell"
+        columns={3}
+        photos={[
+          { src: '/photos/realestate/pool-evening.jpg', alt: 'Luxury pool at twilight' },
+          { src: '/photos/realestate/modern-interior.png', alt: 'Modern glass interior' },
+          { src: '/photos/realestate/wine-cellar.png', alt: 'Luxury wine cellar' },
+          { src: '/photos/realestate/house-exterior.png', alt: 'Home exterior with landscaping' },
+          { src: '/photos/realestate/conference-room.jpg', alt: 'Modern conference room' },
+          { src: '/photos/realestate/modern-kitchen.png', alt: 'Modern kitchen design' },
+          { src: '/photos/realestate/pool-lanai.png', alt: 'Pool and lanai area' },
+          { src: '/photos/realestate/luxury-hallway.jpg', alt: 'Luxury hallway design' },
+          { src: '/photos/realestate/meeting-room.jpg', alt: 'Meeting room interior' },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════
           FEATURED PROJECT — Spotlight
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32">
@@ -315,7 +332,7 @@ export default function RealtorsBuilders() {
                 <div className="inline-flex px-3 py-1 rounded-full bg-[#E5E5E5]/90 text-[#0B0B0E] text-sm font-medium mb-2">
                   Featured Project
                 </div>
-                <h3 className="text-2xl font-bold text-white">Rhino Homes Open House</h3>
+                <h3 className="text-2xl font-bold text-white">Luxury Open House</h3>
               </div>
             </motion.div>
 
@@ -329,7 +346,7 @@ export default function RealtorsBuilders() {
                 Selling Homes Before They're <span className="text-[#E5E5E5]">Even Listed</span>
               </h2>
               <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
-                We created a full content strategy for Rhino Homes — cinematic property tours, drone footage, and targeted lead funnels that generated $890K in pipeline value in the first quarter.
+                We created a full content strategy — cinematic property tours, drone footage, and targeted lead funnels that generated $890K in pipeline value in the first quarter.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
@@ -475,19 +492,19 @@ export default function RealtorsBuilders() {
       <Testimonials
         testimonials={[
           {
-            name: 'David Chen', role: 'Realtor', company: 'Luxury Properties Miami',
+            name: 'David C.', role: 'Realtor', company: 'Luxury Real Estate',
             image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop',
             content: 'Finally, a marketing agency that understands real estate. The leads are high-quality, and the automated follow-up system is brilliant.',
             rating: 5,
           },
           {
-            name: 'Rachel Thompson', role: 'Broker Associate', company: 'Coastal Realty Group',
+            name: 'Rachel T.', role: 'Broker Associate', company: 'Realty Group',
             image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop',
             content: 'RAW Formato\'s landing pages are converting at 28%—way above industry average. My pipeline has never been stronger.',
             rating: 5,
           },
           {
-            name: 'James Morrison', role: 'Owner', company: 'Morrison Custom Homes',
+            name: 'James M.', role: 'Owner', company: 'Custom Home Builder',
             image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop',
             content: 'We sold out our latest development 4 months ahead of schedule. Their targeting brought us exactly the buyers we needed.',
             rating: 5,

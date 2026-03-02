@@ -16,6 +16,7 @@ import { ContactForm } from '../components/ContactForm';
 import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
+import { PhotoGallery } from '../components/PhotoGallery';
 
 /* ── Lazy video: play only when visible ── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
@@ -97,11 +98,11 @@ export default function AutomotiveSports() {
 
   const showcaseVideos = [
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055393/auto-teaser_cnodc4.mp4', title: 'Auto Teaser', category: 'Automotive' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055635/mimessi-cafe_l96sa2.mp4', title: 'Mimessi Collection', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4', title: 'MFK Performance', category: 'Performance' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4', title: 'Aston Martin Showcase', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Aprilia Showcase', category: 'Motorsport' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055517/hayabusa_oejqzh.mp4', title: 'Hayabusa', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055635/mimessi-cafe_l96sa2.mp4', title: 'Luxury Collection', category: 'Luxury Cars' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055621/mfk-dyno_fzssbr.mp4', title: 'Dyno Day', category: 'Performance' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055394/aston-martin_ljwhgb.mp4', title: 'Luxury Showcase', category: 'Luxury Cars' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055636/moto-aprilia_on8km6.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055517/hayabusa_oejqzh.mp4', title: 'Speed Unleashed', category: 'Motorsport' },
   ];
 
   const reelVideos = [
@@ -135,11 +136,7 @@ export default function AutomotiveSports() {
         <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 200px 40px rgba(11,11,14,0.5)' }} />
 
         <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]"
-          />
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E5E5E5]/20 rounded-full blur-[100px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32">
@@ -163,7 +160,7 @@ export default function AutomotiveSports() {
             </h1>
 
             <p className="text-xl md:text-2xl text-white/50 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-              Drive qualified leads, build brand loyalty, and dominate your market with campaigns designed for speed.
+              Drive qualified leads, strengthen your brand, and grow your market presence with performance-driven campaigns.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -286,6 +283,33 @@ export default function AutomotiveSports() {
       </section>
 
       {/* ═══════════════════════════════════════
+          PHOTOGRAPHY PORTFOLIO
+          ═══════════════════════════════════════ */}
+      <PhotoGallery
+        title={<>Motorsport & Automotive <span className="text-[#E5E5E5]">Photography</span></>}
+        subtitle="Capturing speed, power, and precision"
+        columns={3}
+        photos={[
+          { src: '/photos/automotive/sports-car.jpg', alt: 'Sports car in motion' },
+          { src: '/photos/automotive/moto-racing-1.jpg', alt: 'Motorcycle track racing' },
+          { src: '/photos/automotive/carbon-detail.jpg', alt: 'Carbon fiber supercar detail' },
+          { src: '/photos/automotive/paint-booth-1.jpg', alt: 'Professional auto paint work' },
+          { src: '/photos/automotive/moto-racing-2.jpg', alt: 'Motorcycle racing action' },
+          { src: '/photos/automotive/classic-interior.jpg', alt: 'Classic car interior' },
+          { src: '/photos/automotive/moto-racing-3.jpg', alt: 'Race bike on track' },
+          { src: '/photos/automotive/paint-booth-2.jpg', alt: 'Auto body spray booth' },
+          { src: '/photos/automotive/moto-pit-1.jpg', alt: 'Pit area preparation' },
+          { src: '/photos/automotive/moto-racing-4.jpg', alt: 'Motorsport action shot' },
+          { src: '/photos/automotive/paint-booth-3.jpg', alt: 'Professional paint application' },
+          { src: '/photos/automotive/moto-racing-5.jpg', alt: 'Track racing cornering' },
+          { src: '/photos/fitness/training-session.jpg', alt: 'Athletic training session' },
+          { src: '/photos/automotive/moto-pit-2.jpg', alt: 'Rider in pit area' },
+          { src: '/photos/fitness/coach-athlete.jpg', alt: 'Coach guiding athlete' },
+          { src: '/photos/fitness/youth-training.jpg', alt: 'Youth sports training' },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════
           FEATURED PROJECT — Spotlight
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32">
@@ -312,7 +336,7 @@ export default function AutomotiveSports() {
                 <div className="inline-flex px-3 py-1 rounded-full bg-[#E5E5E5]/90 text-[#0B0B0E] text-sm font-medium mb-2">
                   Featured Project
                 </div>
-                <h3 className="text-2xl font-bold text-white">MFK Performance</h3>
+                <h3 className="text-2xl font-bold text-white">Performance Shop</h3>
               </div>
             </motion.div>
 
@@ -326,11 +350,11 @@ export default function AutomotiveSports() {
                 Turning Horsepower into <span className="text-[#E5E5E5]">High-Intent Leads</span>
               </h2>
               <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
-                We partnered with MFK to create high-octane content that captures the raw energy of their performance shop — then turned it into a lead generation machine with targeted campaigns.
+                We created high-octane content that captures the raw energy of a performance shop — then turned it into a lead generation machine with targeted campaigns.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
-                  <div className="text-3xl font-bold text-[#E5E5E5]">312%</div>
+                  <div className="text-3xl font-bold text-[#E5E5E5]">240%</div>
                   <div className="text-sm text-[#F2F2F2]/50">Lead increase</div>
                 </div>
                 <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
@@ -393,8 +417,8 @@ export default function AutomotiveSports() {
         title={<>Performance <span className="text-[#E5E5E5]">Results</span></>}
         subtitle="Real metrics from automotive and sports campaigns"
         stats={[
-          { value: '312%', label: 'Lead Increase', sublabel: 'First 90 days', icon: <TrendingUp size={28} /> },
-          { value: '4.8x', label: 'ROAS Average', sublabel: 'Across campaigns', icon: <Target size={28} /> },
+          { value: '240%', label: 'Lead Increase', sublabel: 'First 90 days', icon: <TrendingUp size={28} /> },
+          { value: '4.8x', label: 'Average ROAS', sublabel: 'Across campaigns', icon: <Target size={28} /> },
           { value: '50+', label: 'Videos Produced', sublabel: 'Per quarter', icon: <Video size={28} /> },
           { value: '2.4M+', label: 'Impressions', sublabel: 'Generated monthly', icon: <Users size={28} /> },
         ]}
@@ -461,19 +485,19 @@ export default function AutomotiveSports() {
       <Testimonials
         testimonials={[
           {
-            name: 'Michael Rodriguez', role: 'Owner', company: 'Elite Auto Group',
+            name: 'Michael R.', role: 'Owner', company: 'Automotive Dealership',
             image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
             content: 'RAW Formato transformed our digital presence. We went from struggling to get leads to having a waiting list. Their AI-powered creative testing is game-changing.',
             rating: 5,
           },
           {
-            name: 'Carlos Mendez', role: 'Marketing Director', company: 'Precision Motors',
+            name: 'Carlos M.', role: 'Marketing Director', company: 'Performance Auto Brand',
             image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
             content: 'The quality of leads has improved dramatically. These aren\'t tire kickers—they\'re serious buyers ready to purchase. Best ROI we\'ve seen.',
             rating: 5,
           },
           {
-            name: 'Jennifer Park', role: 'General Manager', company: 'Luxury Auto Collection',
+            name: 'Jennifer P.', role: 'General Manager', company: 'Luxury Auto Dealership',
             image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
             content: 'Their content production is absolutely world-class. Every video, every photo—it all looks premium and drives real engagement.',
             rating: 5,

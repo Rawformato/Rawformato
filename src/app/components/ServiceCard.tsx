@@ -10,8 +10,8 @@ interface ServiceCardProps {
 export function ServiceCard({ icon, title, description }: ServiceCardProps) {
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="group relative p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm transition-all hover:border-[#E5E5E5]/50"
+      whileHover={{ scale: 1.02 }}
+      className="group relative p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] transition-all hover:border-[#E5E5E5]/50"
     >
       {/* Glow effect */}
       <div className="absolute inset-0 rounded-xl bg-[#E5E5E5]/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
