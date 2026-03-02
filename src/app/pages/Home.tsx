@@ -174,7 +174,7 @@ export default function Home() {
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4', title: 'Crave-Worthy Content', category: 'Food & Beverage' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Prestige Creations', category: 'Automotive' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4', title: 'Architecture Recap', category: 'Real Estate' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492961/POV_A_la_Cruz_6_u1l0au.mp4', title: 'Strength & Power', category: 'Fitness' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4', title: 'Strength & Power', category: 'Fitness' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
   ];
 
@@ -184,7 +184,7 @@ export default function Home() {
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492961/POV_A_la_Cruz_6_u1l0au.mp4',
+    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4',
   ];
