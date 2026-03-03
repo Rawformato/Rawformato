@@ -50,7 +50,7 @@ export function PhotoGallery({ photos, title, subtitle, columns = 3 }: PhotoGall
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{ duration: 0.4 }}
-              className="mb-3 md:mb-4 break-inside-avoid"
+              className={`mb-3 md:mb-4 break-inside-avoid ${index >= 8 ? 'hidden md:block' : ''}`}
             >
               <div className="group relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-white/25 transition-all duration-500 bg-[#111]">
                 <img
@@ -58,7 +58,7 @@ export function PhotoGallery({ photos, title, subtitle, columns = 3 }: PhotoGall
                   alt={photo.alt}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                  className="w-full h-auto object-cover transition-opacity duration-500 group-hover:opacity-90"
                 />
                 {/* Subtle gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

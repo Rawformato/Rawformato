@@ -138,10 +138,16 @@ export default function RealtorsBuilders() {
           ═══════════════════════════════════════ */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden -mt-20 pt-20">
         <div className="absolute inset-0">
+          {/* Mobile: static poster; Desktop: autoplay video */}
+          <img
+            src="https://res.cloudinary.com/dvad6wd2v/video/upload/so_0,w_1280,q_auto,f_jpg/v1772492921/Rhino_Homes_Recap_jvwrpz.jpg"
+            alt=""
+            className="md:hidden w-full h-full object-cover opacity-40"
+          />
           <video
-            autoPlay muted loop playsInline preload="auto"
+            autoPlay muted loop playsInline preload="metadata"
             src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4"
-            className="w-full h-full object-cover opacity-40"
+            className="hidden md:block w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0E]/40 via-transparent to-[#0B0B0E]/40" />

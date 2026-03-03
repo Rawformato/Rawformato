@@ -45,20 +45,9 @@ const defaultTestimonials: Testimonial[] = [
 export function Testimonials({ testimonials = defaultTestimonials }: TestimonialsProps) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background elements */}
+      {/* Background glow — static for performance */}
       <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.05, 0.1, 0.05],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E5E5E5]/30 rounded-full blur-[120px]"
-        />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E5E5E5]/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">

@@ -114,7 +114,7 @@ export function Header() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-sm py-2 transition-colors ${
+                  className={`text-sm py-3 transition-colors ${
                     location.pathname === link.path
                       ? 'text-[#E5E5E5]'
                       : 'text-[#F2F2F2]/70'

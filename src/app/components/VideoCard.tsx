@@ -17,6 +17,15 @@ function useIsTouchDevice() {
   return isTouch;
 }
 
+/** Insert Cloudinary width transform into URL for mobile bandwidth savings */
+function cloudinarySrc(url: string, width: number): string {
+  const match = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/.+)$/);
+  if (!match) return url;
+  return `${match[1]}q_auto,w_${width}/${match[2]}`;
+}
+
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 export function VideoCard({
   src,
   title,
@@ -70,7 +79,7 @@ export function VideoCard({
       <div className={`relative ${aspectClass}`}>
         <video
           ref={videoRef}
-          src={src}
+          src={isMobile ? cloudinarySrc(src, 480) : cloudinarySrc(src, 720)}
           muted
           loop
           playsInline
