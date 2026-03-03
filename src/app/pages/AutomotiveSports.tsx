@@ -17,6 +17,7 @@ import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { SEO } from '../components/SEO';
 
 /* ── Lazy video: play only when visible ── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
@@ -118,6 +119,12 @@ export default function AutomotiveSports() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Automotive & Sports Marketing | RAW Formato"
+        description="Performance marketing for automotive dealerships, car brands, and sports companies. Drive qualified leads with high-octane campaigns."
+        path="/automotive-sports"
+      />
+
       {/* ═══════════════════════════════════════
           HERO — Cinematic Video Background
           ═══════════════════════════════════════ */}

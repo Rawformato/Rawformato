@@ -19,6 +19,7 @@ import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { SEO } from '../components/SEO';
 
 /* ── Lazy video: play only when visible ── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
@@ -89,6 +90,12 @@ export default function Restaurants() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Restaurant Marketing | RAW Formato"
+        description="Turn views into reservations. Viral content, local ads, and influencer-ready campaigns that fill tables and build community."
+        path="/restaurants"
+      />
+
       {/* ═══════════════════════════════════════
           HERO — Cinematic Video Background
           ═══════════════════════════════════════ */}

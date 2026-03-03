@@ -2,10 +2,15 @@ import { motion } from 'motion/react';
 import { Home, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router';
 import { Button } from '../components/Button';
+import { SEO } from '../components/SEO';
 
 export default function NotFound() {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20">
+      <SEO
+        title="Page Not Found | RAW Formato"
+        description="The page you're looking for doesn't exist. Head back to RAW Formato's homepage."
+      />
       <div className="absolute inset-0">
         <motion.div
           animate={{

@@ -21,6 +21,7 @@ import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { SEO } from '../components/SEO';
 
 /* ── Lazy video: play only when visible ── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
@@ -126,6 +127,12 @@ export default function RealtorsBuilders() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Real Estate Marketing | RAW Formato"
+        description="Premium leads for premium properties. High-intent funnels and trust-first marketing for realtors and builders."
+        path="/realtors-builders"
+      />
+
       {/* ═══════════════════════════════════════
           HERO — Cinematic Video Background
           ═══════════════════════════════════════ */}

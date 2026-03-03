@@ -27,6 +27,7 @@ import { Testimonials } from '../components/Testimonials';
 import { FAQ } from '../components/FAQ';
 import { Stats } from '../components/Stats';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { SEO } from '../components/SEO';
 
 /* ────────────────────────────────────────────────
    useLazyVideo — play video only when visible
@@ -192,6 +193,11 @@ export default function Home() {
   /* ── Render ────────────────────────────── */
   return (
     <div className="relative">
+      <SEO
+        title="RAW Formato | Creative Marketing & AI Agency"
+        description="We turn brands into movements through scroll-stopping content and AI-powered performance marketing."
+        path="/"
+      />
 
       {/* ═══════════════════════════════════════════════════════
           HERO — Fullscreen Cinematic Video Background
