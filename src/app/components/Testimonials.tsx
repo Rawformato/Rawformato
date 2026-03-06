@@ -47,7 +47,7 @@ export function Testimonials({ testimonials = defaultTestimonials }: Testimonial
     <section className="relative py-24 lg:py-32 overflow-hidden">
       {/* Background glow — static for performance */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E5E5E5]/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E5E5E5]/10 rounded-full blur-[80px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -75,7 +75,7 @@ export function Testimonials({ testimonials = defaultTestimonials }: Testimonial
               transition={{ delay: index * 0.1 }}
               className="group relative"
             >
-              <div className="relative p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#E5E5E5]/50 transition-all h-full flex flex-col">
+              <div className="relative p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all h-full flex flex-col">
                 {/* Quote icon */}
                 <Quote className="absolute top-6 right-6 text-[#E5E5E5]/20 w-12 h-12" />
 

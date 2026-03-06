@@ -47,7 +47,7 @@ export function Stats({ stats = defaultStats, title, subtitle }: StatsProps) {
       {/* Background gradient — static for performance */}
       <div className="absolute inset-0">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#E5E5E5]/15 rounded-full blur-[150px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#E5E5E5]/15 rounded-full blur-[80px]"
         />
       </div>
 
@@ -80,7 +80,7 @@ export function Stats({ stats = defaultStats, title, subtitle }: StatsProps) {
               transition={{ delay: index * 0.1 }}
               className="relative group"
             >
-              <div className="relative p-6 lg:p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#E5E5E5]/50 transition-all text-center h-full flex flex-col justify-center">
+              <div className="relative p-6 lg:p-8 rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all text-center h-full flex flex-col justify-center">
                 {stat.icon && (
                   <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[#E5E5E5]/10 text-[#E5E5E5] mx-auto group-hover:scale-110 transition-transform">
                     {stat.icon}

@@ -184,10 +184,8 @@ export default function Home() {
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4',
     'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4',
   ];
 
   /* ── Render ────────────────────────────── */
@@ -233,15 +231,12 @@ export default function Home() {
         {/* Vignette effect */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ boxShadow: 'inset 0 0 250px 50px rgba(11,11,14,0.4)' }}
+          style={{ background: 'radial-gradient(ellipse at center, transparent 50%, rgba(11,11,14,0.4) 100%)' }}
         />
-
-        {/* Noise texture */}
-        <div className="absolute inset-0 opacity-[0.025] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JhaW4iIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFpbikiLz48L3N2Zz4=')]" />
 
         {/* Hero Content */}
         <motion.div
-          style={{ opacity: heroOpacity }}
+          style={{ opacity: heroOpacity, willChange: 'opacity' }}
           className="relative z-10 text-center max-w-5xl mx-auto px-6"
         >
           {/* Badge */}
@@ -495,19 +490,17 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-              >
-                <ServiceCard {...service} />
-              </motion.div>
+              <ServiceCard key={index} {...service} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -534,17 +527,16 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          >
             {aiStack.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="relative group"
-              >
-                <div className="relative p-8 rounded-2xl border border-[#E5E5E5]/20 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#E5E5E5]/50 transition-all">
+              <div key={index} className="relative group">
+                <div className="relative p-8 rounded-2xl border border-[#E5E5E5]/20 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all">
                   {index < aiStack.length - 1 && (
                     <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-r from-[#E5E5E5]/50 to-transparent" />
                   )}
@@ -554,9 +546,9 @@ export default function Home() {
                   <h3 className="text-xl font-bold text-[#F2F2F2] mb-3">{item.title}</h3>
                   <p className="text-[#F2F2F2]/60 leading-relaxed">{item.description}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -579,16 +571,15 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {processSteps.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="relative"
-              >
+              <div key={index} className="relative">
                 {index < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-[#E5E5E5]/50 via-[#E5E5E5]/30 to-transparent -z-10" />
                 )}
@@ -597,9 +588,9 @@ export default function Home() {
                   <h3 className="text-2xl font-bold text-[#F2F2F2] mb-3">{item.title}</h3>
                   <p className="text-[#F2F2F2]/60 leading-relaxed">{item.description}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -630,7 +621,7 @@ export default function Home() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4 }}
-                className="group relative rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#E5E5E5]/50 transition-all overflow-hidden"
+                className="group relative rounded-2xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all overflow-hidden"
               >
                 {/* Video background — lazy loaded */}
                 <div className="relative h-64 overflow-hidden will-change-transform">

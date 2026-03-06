@@ -85,7 +85,7 @@ export function FAQ({ items = defaultFAQs, title, subtitle }: FAQProps) {
             >
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full text-left p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] backdrop-blur-sm hover:border-[#E5E5E5]/50 transition-all"
+                className="w-full text-left p-6 rounded-xl border border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50 transition-all"
               >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="text-lg font-semibold text-[#F2F2F2] pr-8">

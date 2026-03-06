@@ -1,10 +1,12 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
 import Root from "./pages/Root";
-import Home from "./pages/Home";
-import AutomotiveSports from "./pages/AutomotiveSports";
-import Restaurants from "./pages/Restaurants";
-import RealtorsBuilders from "./pages/RealtorsBuilders";
-import NotFound from "./pages/NotFound";
+
+const Home = lazy(() => import("./pages/Home"));
+const AutomotiveSports = lazy(() => import("./pages/AutomotiveSports"));
+const Restaurants = lazy(() => import("./pages/Restaurants"));
+const RealtorsBuilders = lazy(() => import("./pages/RealtorsBuilders"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 export const router = createBrowserRouter([
   {

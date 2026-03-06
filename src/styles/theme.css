@@ -115,11 +115,6 @@
 
 /* Reduce heavy effects on mobile for performance */
 @media (max-width: 768px) {
-  .backdrop-blur-xl {
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
-  }
-
   /* Slow down marquee/reel on mobile to reduce GPU load */
   .animate-marquee {
     animation-duration: 60s;
@@ -159,6 +154,7 @@
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* Off-screen content optimization — skip rendering for far-away sections */
