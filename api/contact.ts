@@ -160,7 +160,7 @@ function userConfirmationEmail(name: string, message: string) {
               <tr>
                 <td style="background-color: #0B0B0E; padding: 28px 32px; border-radius: 0 0 12px 12px; text-align: center;">
                   <p style="margin: 0 0 8px 0; font-size: 13px; color: #a1a1aa;">
-                    RAW Formato &mdash; Creative Marketing Agency
+                    RAW Formato | Creative Marketing Agency
                   </p>
                   <a href="https://www.rawformato.com" style="font-size: 12px; color: #71717a; text-decoration: none;">
                     www.rawformato.com

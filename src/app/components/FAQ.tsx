@@ -20,7 +20,7 @@ const defaultFAQs: FAQItem[] = [
   },
   {
     question: 'How quickly can we see results?',
-    answer: 'Most clients see initial momentum within the first 30 days—improved engagement, better ad performance, and increased leads. Significant ROI typically appears within 60-90 days as we optimize campaigns and scale what works. We focus on sustainable growth, not quick tricks.',
+    answer: 'Most clients see initial momentum within the first 30 days: improved engagement, better ad performance, and increased leads. Significant ROI typically appears within 60-90 days as we optimize campaigns and scale what works. We focus on sustainable growth, not quick tricks.',
   },
   {
     question: 'Do you work with businesses outside of Florida?',
@@ -36,7 +36,7 @@ const defaultFAQs: FAQItem[] = [
   },
   {
     question: 'How involved do I need to be?',
-    answer: 'We handle the heavy lifting—strategy, creative, execution, and optimization. You will have bi-weekly or weekly check-ins (depending on your package) and approve major creative directions. Most clients spend 2-4 hours per month on collaboration. We make it easy.',
+    answer: 'We handle the heavy lifting: strategy, creative, execution, and optimization. You will have bi-weekly or weekly check-ins (depending on your package) and approve major creative directions. Most clients spend 2-4 hours per month on collaboration. We make it easy.',
   },
   {
     question: 'What if I am not happy with the results?',

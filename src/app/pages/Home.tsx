@@ -27,7 +27,30 @@ import { Testimonials } from '../components/Testimonials';
 import { FAQ } from '../components/FAQ';
 import { Stats } from '../components/Stats';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { ScrollableReel } from '../components/ScrollableReel';
 import { SEO } from '../components/SEO';
+
+/* ── Cloudinary helpers ── */
+const _isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+function mobileSrc(url: string): string {
+  if (!_isMobile) return url;
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/.+)$/);
+  return m ? `${m[1]}q_auto,w_480/${m[2]}` : url;
+}
+
+function videoPoster(url: string): string {
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/)(.+)\.mp4$/);
+  if (!m) return '';
+  const w = _isMobile ? 480 : 720;
+  return `${m[1]}so_0,w_${w},q_auto,f_jpg/${m[2]}${m[3]}.jpg`;
+}
+
+function tryPlay(video: HTMLVideoElement) {
+  video.play().catch(() => {
+    setTimeout(() => video.play().catch(() => {}), 300);
+  });
+}
 
 /* ────────────────────────────────────────────────
    useLazyVideo — play video only when visible
@@ -44,7 +67,7 @@ function useLazyVideo(options: { rootMargin?: string } = {}) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          tryPlay(video);
         } else {
           video.pause();
         }
@@ -63,6 +86,7 @@ function useLazyVideo(options: { rootMargin?: string } = {}) {
    ──────────────────────────────────────────────── */
 function ReelVideo({ src }: { src: string }) {
   const { videoRef, containerRef } = useLazyVideo({ rootMargin: '100px' });
+  const optimized = mobileSrc(src);
 
   return (
     <div
@@ -74,8 +98,9 @@ function ReelVideo({ src }: { src: string }) {
         muted
         loop
         playsInline
-        preload="none"
-        src={src}
+        preload="metadata"
+        poster={videoPoster(src)}
+        src={optimized}
         className="w-full h-full object-cover"
       />
     </div>
@@ -87,6 +112,7 @@ function ReelVideo({ src }: { src: string }) {
    ──────────────────────────────────────────────── */
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
   const { videoRef, containerRef } = useLazyVideo({ rootMargin: '200px' });
+  const optimized = mobileSrc(src);
 
   return (
     <div ref={containerRef} className="w-full h-full">
@@ -95,8 +121,9 @@ function LazyVideo({ src, className = '' }: { src: string; className?: string })
         muted
         loop
         playsInline
-        preload="none"
-        src={src}
+        preload="metadata"
+        poster={videoPoster(src)}
+        src={optimized}
         className={className}
       />
     </div>
@@ -173,7 +200,7 @@ export default function Home() {
   const showcaseVideos = [
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4', title: 'Crave-Worthy Content', category: 'Food & Beverage' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Prestige Creations', category: 'Automotive' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Automotive Cinematic', category: 'Automotive' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4', title: 'Architecture Recap', category: 'Real Estate' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4', title: 'Strength & Power', category: 'Fitness' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
@@ -333,7 +360,7 @@ export default function Home() {
               What We <span className="text-[#E5E5E5]">Create</span>
             </h2>
             <p className="text-lg text-[#F2F2F2]/40 max-w-xl mx-auto">
-              Hover to preview. Every piece crafted to convert.
+              Every piece crafted to convert.
             </p>
           </motion.div>
 
@@ -354,7 +381,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           VIDEO REEL — Horizontal Auto-Scrolling Strip
           ═══════════════════════════════════════════════════════ */}
-      <section className="relative py-12 lg:py-20 overflow-hidden">
+      <section className="relative py-12 lg:py-20 overflow-clip">
         {/* Gradient fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
@@ -372,11 +399,11 @@ export default function Home() {
         </motion.div>
 
         {/* Scrolling reel — only visible videos play, duplicate for seamless loop */}
-        <div className="flex gap-4 md:gap-6 animate-scroll-reel">
+        <ScrollableReel className="gap-4 md:gap-6">
           {[...reelVideos, ...reelVideos].map((src, index) => (
             <ReelVideo key={index} src={src} />
           ))}
-        </div>
+        </ScrollableReel>
       </section>
 
       {/* ═══════════════════════════════════════════════════════

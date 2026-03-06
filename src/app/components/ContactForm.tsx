@@ -141,16 +141,16 @@ export function ContactForm() {
                   className="w-full px-4 py-3 rounded-lg bg-[#F2F2F2]/5 border border-white/10 text-[#F2F2F2] focus:border-[#E5E5E5] focus:ring-1 focus:ring-[#E5E5E5] outline-none transition-colors"
                 >
                   <option value="" className="bg-[#1a1a1e]">Select an industry</option>
-                  <option value="restaurants" className="bg-[#1a1a1e]">Restaurants</option>
-                  <option value="realestate" className="bg-[#1a1a1e]">Real Estate</option>
-                  <option value="automotive" className="bg-[#1a1a1e]">Automotive & Sports</option>
-                  <option value="aesthetics" className="bg-[#1a1a1e]">Aesthetics & Beauty</option>
-                  <option value="homeservices" className="bg-[#1a1a1e]">Home Services</option>
-                  <option value="fitness" className="bg-[#1a1a1e]">Fitness</option>
-                  <option value="ecommerce" className="bg-[#1a1a1e]">E-Commerce</option>
-                  <option value="personalbrand" className="bg-[#1a1a1e]">Personal Brand</option>
-                  <option value="professional" className="bg-[#1a1a1e]">Professional Services</option>
-                  <option value="other" className="bg-[#1a1a1e]">Other</option>
+                  <option value="Restaurants" className="bg-[#1a1a1e]">Restaurants</option>
+                  <option value="Real Estate" className="bg-[#1a1a1e]">Real Estate</option>
+                  <option value="Automotive & Sports" className="bg-[#1a1a1e]">Automotive & Sports</option>
+                  <option value="Aesthetics & Beauty" className="bg-[#1a1a1e]">Aesthetics & Beauty</option>
+                  <option value="Home Services" className="bg-[#1a1a1e]">Home Services</option>
+                  <option value="Fitness" className="bg-[#1a1a1e]">Fitness</option>
+                  <option value="E-Commerce" className="bg-[#1a1a1e]">E-Commerce</option>
+                  <option value="Personal Brand" className="bg-[#1a1a1e]">Personal Brand</option>
+                  <option value="Professional Services" className="bg-[#1a1a1e]">Professional Services</option>
+                  <option value="Other" className="bg-[#1a1a1e]">Other</option>
                 </select>
               </div>
 

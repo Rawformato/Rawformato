@@ -46,6 +46,16 @@
   touch-action: pan-x;
 }
 
+/* Scrollable reel (swipeable) */
+.scrollable-reel {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollable-reel::-webkit-scrollbar { display: none; }
+
 /* Parallax video shimmer */
 @keyframes hero-shimmer {
   0%, 100% { opacity: 0.6; }

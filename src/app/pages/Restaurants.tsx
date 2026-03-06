@@ -19,9 +19,31 @@ import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { ScrollableReel } from '../components/ScrollableReel';
 import { SEO } from '../components/SEO';
 
 /* ── Lazy video: play only when visible ── */
+const _isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+function mobileSrc(url: string): string {
+  if (!_isMobile) return url;
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/.+)$/);
+  return m ? `${m[1]}q_auto,w_480/${m[2]}` : url;
+}
+
+function videoPoster(url: string): string {
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/)(.+)\.mp4$/);
+  if (!m) return '';
+  const w = _isMobile ? 480 : 720;
+  return `${m[1]}so_0,w_${w},q_auto,f_jpg/${m[2]}${m[3]}.jpg`;
+}
+
+function tryPlay(video: HTMLVideoElement) {
+  video.play().catch(() => {
+    setTimeout(() => video.play().catch(() => {}), 300);
+  });
+}
+
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,7 +54,7 @@ function LazyVideo({ src, className = '' }: { src: string; className?: string })
     if (!el || !video) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
+        if (entry.isIntersecting) tryPlay(video);
         else video.pause();
       },
       { rootMargin: '200px', threshold: 0.1 },
@@ -43,18 +65,18 @@ function LazyVideo({ src, className = '' }: { src: string; className?: string })
 
   return (
     <div ref={containerRef} className="w-full h-full">
-      <video ref={videoRef} muted loop playsInline preload="none" src={src} className={className} />
+      <video ref={videoRef} muted loop playsInline preload="metadata" poster={videoPoster(src)} src={mobileSrc(src)} className={className} />
     </div>
   );
 }
 
 export default function Restaurants() {
   const weeklySystem = [
-    { day: 'Monday', tasks: 'Content planning & shoot prep' },
-    { day: 'Tuesday', tasks: 'On-location content capture' },
-    { day: 'Wednesday', tasks: 'Editing & creative assembly' },
-    { day: 'Thursday', tasks: 'Ad campaign optimization' },
-    { day: 'Friday', tasks: 'Posting & community engagement' },
+    { day: 'Step 1', tasks: 'Content planning & shoot prep' },
+    { day: 'Step 2', tasks: 'On-location content capture' },
+    { day: 'Step 3', tasks: 'Editing & creative assembly' },
+    { day: 'Step 4', tasks: 'Ad campaign optimization' },
+    { day: 'Step 5', tasks: 'Posting & community engagement' },
   ];
 
   const deliverables = [
@@ -68,13 +90,52 @@ export default function Restaurants() {
     'Customer review automation',
   ];
 
+  const packages = [
+    {
+      name: 'Starter',
+      description: 'Perfect for testing the waters',
+      features: [
+        '2 ad campaigns per month',
+        'Basic content package',
+        'Monthly reporting',
+        'Email support',
+      ],
+    },
+    {
+      name: 'Growth',
+      description: 'Fill your tables consistently',
+      features: [
+        '4 active campaigns',
+        'Weekly content production',
+        'Advanced targeting & retargeting',
+        'Reservation system integration',
+        'Bi-weekly strategy calls',
+        'Priority support',
+      ],
+      highlighted: true,
+    },
+    {
+      name: 'Scale',
+      description: 'Dominate your market',
+      features: [
+        'Unlimited campaign management',
+        'Daily content pipeline',
+        'AI creative testing lab',
+        'Full funnel automation',
+        'Dedicated account manager',
+        '24/7 support',
+        'Custom integrations',
+      ],
+    },
+  ];
+
   const showcaseVideos = [
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4', title: 'Fine Dining Experience', category: 'Fine Dining' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492920/Copa_f8ew7k.mp4', title: 'Cocktail Bar Vibes', category: 'Bar & Lounge' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/ASMR_A_la_Cruz_x239ex.mp4', title: 'Gastronomy ASMR', category: 'Gastronomy' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/El_Atico_Trendy_zweya8.mp4', title: 'Rooftop Vibes', category: 'Rooftop Bar' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492929/Pisco_Lounge_b91qse.mp4', title: 'Pisco Lounge', category: 'Cocktails' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492929/Pisco_Lounge_b91qse.mp4', title: 'Cocktail Lounge', category: 'Cocktails' },
   ];
 
   const reelVideos = [
@@ -219,7 +280,7 @@ export default function Restaurants() {
               Our Restaurant <span className="text-[#E5E5E5]">Work</span>
             </h2>
             <p className="text-lg text-[#F2F2F2]/40 max-w-xl mx-auto">
-              Hover to preview. Content that makes people hungry.
+              Content that makes people hungry.
             </p>
           </motion.div>
 
@@ -239,7 +300,7 @@ export default function Restaurants() {
       {/* ═══════════════════════════════════════
           VIDEO REEL — Horizontal Auto-Scroll
           ═══════════════════════════════════════ */}
-      <section className="relative py-12 lg:py-20 overflow-hidden">
+      <section className="relative py-12 lg:py-20 overflow-clip">
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
 
@@ -254,7 +315,7 @@ export default function Restaurants() {
           </span>
         </motion.div>
 
-        <div className="flex gap-4 md:gap-6 animate-scroll-reel">
+        <ScrollableReel className="gap-4 md:gap-6">
           {[...reelVideos, ...reelVideos].map((src, index) => (
             <div
               key={index}
@@ -263,7 +324,7 @@ export default function Restaurants() {
               <LazyVideo src={src} className="w-full h-full object-cover" />
             </div>
           ))}
-        </div>
+        </ScrollableReel>
       </section>
 
       {/* ═══════════════════════════════════════
@@ -341,7 +402,7 @@ export default function Restaurants() {
                 From Empty Tables to <span className="text-[#E5E5E5]">Fully Booked</span>
               </h2>
               <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
-                We created a content engine — cinematic reels, ASMR food content, and hyper-local ad campaigns that turned scrollers into diners in under 60 days.
+                We created a content engine: cinematic reels, ASMR food content, and hyper-local ad campaigns that turned scrollers into diners in under 60 days.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
@@ -440,7 +501,7 @@ export default function Restaurants() {
                 <span className="text-[#E5E5E5]">Stay Booked</span>
               </h2>
               <p className="text-xl text-[#F2F2F2]/60 mb-8 leading-relaxed">
-                From social content to paid ads, we handle every touchpoint of your guest journey—before, during, and after the meal.
+                From social content to paid ads, we handle every touchpoint of your guest journey: before, during, and after the meal.
               </p>
               <Button variant="outline" href="#contact">
                 Get Your Custom Plan
@@ -502,6 +563,63 @@ export default function Restaurants() {
           },
         ]}
       />
+
+      {/* ═══════════════════════════════════════
+          PACKAGES
+          ═══════════════════════════════════════ */}
+      <section id="packages" className="relative py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#F2F2F2] mb-6">
+              Choose Your <span className="text-[#E5E5E5]">Growth Path</span>
+            </h2>
+            <p className="text-xl text-[#F2F2F2]/60 max-w-2xl mx-auto">
+              Flexible packages designed to match your ambition
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {packages.map((pkg, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className={`relative p-8 rounded-2xl border backdrop-blur-sm transition-all ${
+                  pkg.highlighted
+                    ? 'border-[#E5E5E5] bg-[#E5E5E5]/5 scale-105'
+                    : 'border-white/10 bg-[#F2F2F2]/[0.02] hover:border-[#E5E5E5]/50'
+                }`}
+              >
+                {pkg.highlighted && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#E5E5E5] text-[#0B0B0E] text-sm font-medium rounded-full">
+                    Most Popular
+                  </div>
+                )}
+                <h3 className="text-2xl font-bold text-[#F2F2F2] mb-2">{pkg.name}</h3>
+                <p className="text-[#F2F2F2]/60 mb-8">{pkg.description}</p>
+                <ul className="space-y-3 mb-8">
+                  {pkg.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 text-[#F2F2F2]/80">
+                      <CheckCircle2 size={18} className="text-[#E5E5E5] mt-0.5 shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button variant={pkg.highlighted ? 'primary' : 'secondary'} href="#contact" className="w-full">
+                  Get Started
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* FAQ */}
       <FAQ

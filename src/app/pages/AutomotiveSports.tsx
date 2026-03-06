@@ -17,9 +17,31 @@ import { Testimonials } from '../components/Testimonials';
 import { Stats } from '../components/Stats';
 import { FAQ } from '../components/FAQ';
 import { PhotoGallery } from '../components/PhotoGallery';
+import { ScrollableReel } from '../components/ScrollableReel';
 import { SEO } from '../components/SEO';
 
 /* ── Lazy video: play only when visible ── */
+const _isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+function mobileSrc(url: string): string {
+  if (!_isMobile) return url;
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/.+)$/);
+  return m ? `${m[1]}q_auto,w_480/${m[2]}` : url;
+}
+
+function videoPoster(url: string): string {
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/)(.+)\.mp4$/);
+  if (!m) return '';
+  const w = _isMobile ? 480 : 720;
+  return `${m[1]}so_0,w_${w},q_auto,f_jpg/${m[2]}${m[3]}.jpg`;
+}
+
+function tryPlay(video: HTMLVideoElement) {
+  video.play().catch(() => {
+    setTimeout(() => video.play().catch(() => {}), 300);
+  });
+}
+
 function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +52,7 @@ function LazyVideo({ src, className = '' }: { src: string; className?: string })
     if (!el || !video) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
+        if (entry.isIntersecting) tryPlay(video);
         else video.pause();
       },
       { rootMargin: '200px', threshold: 0.1 },
@@ -41,7 +63,7 @@ function LazyVideo({ src, className = '' }: { src: string; className?: string })
 
   return (
     <div ref={containerRef} className="w-full h-full">
-      <video ref={videoRef} muted loop playsInline preload="none" src={src} className={className} />
+      <video ref={videoRef} muted loop playsInline preload="metadata" poster={videoPoster(src)} src={mobileSrc(src)} className={className} />
     </div>
   );
 }
@@ -86,7 +108,7 @@ export default function AutomotiveSports() {
       name: 'Scale',
       description: 'Dominate your market',
       features: [
-        'Unlimited campaigns',
+        'Unlimited campaign management',
         'Daily content pipeline',
         'AI creative testing lab',
         'Full funnel automation',
@@ -98,9 +120,9 @@ export default function AutomotiveSports() {
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Prestige Teaser', category: 'Automotive' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Cinematic Teaser', category: 'Automotive' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/Mimessi_Carro_Caf%C3%A9_jtigoh.mp4', title: 'Luxury Collection', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4', title: 'Auto Rojo MFK', category: 'Performance' },
+    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4', title: 'Performance Build', category: 'Performance' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4', title: 'Luxury Showcase', category: 'Luxury Cars' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
     { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Hayabusa_radq7o.mp4', title: 'Speed Unleashed', category: 'Motorsport' },
@@ -268,7 +290,7 @@ export default function AutomotiveSports() {
       {/* ═══════════════════════════════════════
           VIDEO REEL — Horizontal Auto-Scroll
           ═══════════════════════════════════════ */}
-      <section className="relative py-12 lg:py-20 overflow-hidden">
+      <section className="relative py-12 lg:py-20 overflow-clip">
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#0B0B0E] to-transparent z-10 pointer-events-none" />
 
@@ -283,7 +305,7 @@ export default function AutomotiveSports() {
           </span>
         </motion.div>
 
-        <div className="flex gap-4 md:gap-6 animate-scroll-reel">
+        <ScrollableReel className="gap-4 md:gap-6">
           {[...reelVideos, ...reelVideos].map((src, index) => (
             <div
               key={index}
@@ -292,7 +314,7 @@ export default function AutomotiveSports() {
               <LazyVideo src={src} className="w-full h-full object-cover" />
             </div>
           ))}
-        </div>
+        </ScrollableReel>
       </section>
 
       {/* ═══════════════════════════════════════
@@ -363,7 +385,7 @@ export default function AutomotiveSports() {
                 Turning Horsepower into <span className="text-[#E5E5E5]">High-Intent Leads</span>
               </h2>
               <p className="text-lg text-[#F2F2F2]/60 mb-8 leading-relaxed">
-                We created high-octane content that captures the raw energy of a performance shop — then turned it into a lead generation machine with targeted campaigns.
+                We created high-octane content that captures the raw energy of a performance shop, then turned it into a lead generation machine with targeted campaigns.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-[#F2F2F2]/[0.03] border border-white/5">
@@ -506,13 +528,13 @@ export default function AutomotiveSports() {
           {
             name: 'Carlos M.', role: 'Marketing Director', company: 'Performance Auto Brand',
             image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
-            content: 'The quality of leads has improved dramatically. These aren\'t tire kickers—they\'re serious buyers ready to purchase. Best ROI we\'ve seen.',
+            content: 'The quality of leads has improved dramatically. These aren\'t tire kickers, they\'re serious buyers ready to purchase. Best ROI we\'ve seen.',
             rating: 5,
           },
           {
             name: 'Jennifer P.', role: 'General Manager', company: 'Luxury Auto Dealership',
             image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
-            content: 'Their content production is absolutely world-class. Every video, every photo—it all looks premium and drives real engagement.',
+            content: 'Their content production is absolutely world-class. Every video, every photo, it all looks premium and drives real engagement.',
             rating: 5,
           },
         ]}
@@ -522,11 +544,11 @@ export default function AutomotiveSports() {
       <FAQ
         title={<>Automotive Marketing <span className="text-[#E5E5E5]">FAQ</span></>}
         items={[
-          { question: 'What types of automotive businesses do you work with?', answer: 'We work with dealerships, independent car shops, luxury brands, motorsport teams, performance shops, and sports/fitness brands. Whether you sell vehicles, modify them, or build a sports brand—we have proven strategies for your niche.' },
+          { question: 'What types of automotive businesses do you work with?', answer: 'We work with dealerships, independent car shops, luxury brands, motorsport teams, performance shops, and sports/fitness brands. Whether you sell vehicles, modify them, or build a sports brand, we have proven strategies for your niche.' },
           { question: 'How do you generate qualified leads for dealerships?', answer: 'We use a combination of high-intent targeting on Meta, Google, and TikTok, paired with scroll-stopping video creative and optimized landing pages. Our retargeting systems keep your brand top-of-mind until prospects are ready to buy.' },
-          { question: 'What kind of content do you produce?', answer: 'Everything from cinematic brand videos and social reels to ad creatives and event coverage. We handle the full production pipeline—scripting, filming, editing, and optimization for each platform.' },
+          { question: 'What kind of content do you produce?', answer: 'Everything from cinematic brand videos and social reels to ad creatives and event coverage. We handle the full production pipeline: scripting, filming, editing, and optimization for each platform.' },
           { question: 'How soon can we expect results?', answer: 'Most automotive clients see measurable improvement in lead quality within 30 days. Significant ROI typically appears within 60-90 days as we optimize targeting, creative, and funnel performance.' },
-          { question: 'Do you handle social media management too?', answer: 'Yes. Our packages can include full social media management—content calendar, posting, community engagement, and performance reporting. We keep your brand active and growing on all platforms.' },
+          { question: 'Do you handle social media management too?', answer: 'Yes. Our packages can include full social media management: content calendar, posting, community engagement, and performance reporting. We keep your brand active and growing on all platforms.' },
         ]}
       />
 
