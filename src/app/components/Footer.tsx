@@ -68,6 +68,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="text-[#F2F2F2]/60 text-sm">Paid Advertising</li>
               <li className="text-[#F2F2F2]/60 text-sm">Content Production</li>
+              <li className="text-[#F2F2F2]/60 text-sm">Social Media Management</li>
               <li className="text-[#F2F2F2]/60 text-sm">Lead Generation</li>
               <li className="text-[#F2F2F2]/60 text-sm">Marketing Automation</li>
               <li className="text-[#F2F2F2]/60 text-sm">AI Creative Testing</li>
@@ -90,8 +91,8 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2 text-[#F2F2F2]/60 text-sm">
                 <Mail size={16} className="mt-0.5 shrink-0" />
-                <a href="mailto:hello@rawformato.com" className="hover:text-[#E5E5E5] transition-colors">
-                  hello@rawformato.com
+                <a href="mailto:rawformato.web@gmail.com" className="hover:text-[#E5E5E5] transition-colors">
+                  rawformato.web@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2 text-[#F2F2F2]/60 text-sm">
