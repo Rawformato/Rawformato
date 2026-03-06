@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import {
   Target,
   Globe,
-  Mail,
   Calendar,
   CheckCircle2,
   ArrowRight,
@@ -85,12 +84,6 @@ export default function RealtorsBuilders() {
       icon: <Globe size={24} />,
       title: 'High-Converting Pages',
       description: 'Custom landing pages designed to capture qualified leads and showcase properties.',
-    },
-    {
-      step: 'Follow-Up',
-      icon: <Mail size={24} />,
-      title: 'Automated Nurture',
-      description: 'Email and SMS sequences that build trust and keep you top-of-mind.',
     },
     {
       step: 'Booking',
