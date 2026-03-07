@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="64" fill="#0B0B0E"/>
-  <!-- Logo box -->
-  <rect x="96" y="156" width="320" height="200" rx="8" fill="none" stroke="#F2F2F2" stroke-width="16"/>
-  <!-- RAW text -->
-  <text x="256" y="312" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="900" font-size="150" fill="#F2F2F2" letter-spacing="4">RAW</text>
-</svg>

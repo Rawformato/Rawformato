@@ -5,13 +5,14 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       <meta name="theme-color" content="#0B0B0E" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
       <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+      <!-- Preload hero video for faster LCP -->
+      <link rel="preload" as="video" href="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055615/hero_rxmpqm.mp4" type="video/mp4" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content="RAW Formato" />
@@ -22,6 +23,7 @@
       <meta property="og:type" content="website" />
       <meta property="og:title" content="RAW Formato | Creative Marketing & AI Agency" />
       <meta property="og:description" content="We turn brands into movements through scroll-stopping content and AI-powered performance marketing." />
+      <meta property="og:image" content="https://rawformato.com/favicon-192x192.png" />
       <meta property="og:url" content="https://rawformato.com" />
       <meta property="og:site_name" content="RAW Formato" />
 
@@ -29,6 +31,28 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="RAW Formato | Creative Marketing & AI Agency" />
       <meta name="twitter:description" content="We turn brands into movements through scroll-stopping content and AI-powered performance marketing." />
+      <meta name="twitter:image" content="https://rawformato.com/favicon-192x192.png" />
+
+      <!-- Structured Data -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MarketingAgency",
+        "name": "RAW Formato",
+        "url": "https://rawformato.com",
+        "logo": "https://rawformato.com/favicon-192x192.png",
+        "description": "Creative Marketing & AI Agency. We turn brands into movements through scroll-stopping content and AI-powered performance marketing.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "FL",
+          "addressCountry": "US"
+        },
+        "telephone": "+17862236367",
+        "email": "rawformato.web@gmail.com",
+        "sameAs": ["https://instagram.com/rawformato"],
+        "serviceType": ["Paid Advertising", "Content Production", "Social Media Management", "Lead Generation", "Marketing Automation"]
+      }
+      </script>
     </head>
 
     <body>

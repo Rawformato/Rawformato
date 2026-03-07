@@ -238,7 +238,8 @@ export default function Home() {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
+            poster="https://res.cloudinary.com/dvad6wd2v/video/upload/so_0,w_1280,q_auto,f_jpg/v1772055615/hero_rxmpqm.jpg"
             className="absolute inset-0 w-full h-full object-cover"
           >
             {/* Mobile: lower quality for bandwidth */}
@@ -479,22 +480,22 @@ export default function Home() {
         subtitle="Professional photography that elevates every brand"
         columns={4}
         photos={[
-          { src: '/photos/restaurants/grilled-steak.jpg', alt: 'Grilled steak with chimichurri' },
-          { src: '/photos/automotive/sports-car.jpg', alt: 'Sports car in motion' },
-          { src: '/photos/realestate/pool-evening.jpg', alt: 'Luxury pool at twilight' },
-          { src: '/photos/restaurants/smoky-cocktail.png', alt: 'Smoky old fashioned cocktail' },
-          { src: '/photos/automotive/moto-racing-1.jpg', alt: 'Motorcycle track racing' },
-          { src: '/photos/restaurants/sushi-roll.png', alt: 'Sushi roll presentation' },
-          { src: '/photos/realestate/wine-cellar.png', alt: 'Luxury wine cellar' },
-          { src: '/photos/restaurants/latte-art.jpg', alt: 'Latte art pour' },
-          { src: '/photos/automotive/carbon-detail.jpg', alt: 'Carbon fiber detail' },
-          { src: '/photos/restaurants/causa-peruvian.png', alt: 'Peruvian causa' },
-          { src: '/photos/realestate/modern-interior.png', alt: 'Modern glass interior' },
-          { src: '/photos/fitness/training-session.jpg', alt: 'Athletic training' },
-          { src: '/photos/restaurants/espresso-martini.png', alt: 'Espresso martini' },
-          { src: '/photos/automotive/classic-interior.jpg', alt: 'Classic car interior' },
-          { src: '/photos/restaurants/affogato-dessert.jpg', alt: 'Affogato dessert' },
-          { src: '/photos/lifestyle/beach-sunset.jpg', alt: 'Beach lifestyle shoot' },
+          { src: '/photos/restaurants/grilled-steak.webp', alt: 'Grilled steak with chimichurri' },
+          { src: '/photos/automotive/sports-car.webp', alt: 'Sports car in motion' },
+          { src: '/photos/realestate/pool-evening.webp', alt: 'Luxury pool at twilight' },
+          { src: '/photos/restaurants/smoky-cocktail.webp', alt: 'Smoky old fashioned cocktail' },
+          { src: '/photos/automotive/moto-racing-1.webp', alt: 'Motorcycle track racing' },
+          { src: '/photos/restaurants/sushi-roll.webp', alt: 'Sushi roll presentation' },
+          { src: '/photos/realestate/wine-cellar.webp', alt: 'Luxury wine cellar' },
+          { src: '/photos/restaurants/latte-art.webp', alt: 'Latte art pour' },
+          { src: '/photos/automotive/carbon-detail.webp', alt: 'Carbon fiber detail' },
+          { src: '/photos/restaurants/causa-peruvian.webp', alt: 'Peruvian causa' },
+          { src: '/photos/realestate/modern-interior.webp', alt: 'Modern glass interior' },
+          { src: '/photos/fitness/training-session.webp', alt: 'Athletic training' },
+          { src: '/photos/restaurants/espresso-martini.webp', alt: 'Espresso martini' },
+          { src: '/photos/automotive/classic-interior.webp', alt: 'Classic car interior' },
+          { src: '/photos/restaurants/affogato-dessert.webp', alt: 'Affogato dessert' },
+          { src: '/photos/lifestyle/beach-sunset.webp', alt: 'Beach lifestyle shoot' },
         ]}
       />
 

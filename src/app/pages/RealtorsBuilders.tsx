@@ -360,15 +360,15 @@ export default function RealtorsBuilders() {
         subtitle="Showcasing spaces that inspire and sell"
         columns={3}
         photos={[
-          { src: '/photos/realestate/pool-evening.jpg', alt: 'Luxury pool at twilight' },
-          { src: '/photos/realestate/modern-interior.png', alt: 'Modern glass interior' },
-          { src: '/photos/realestate/wine-cellar.png', alt: 'Luxury wine cellar' },
-          { src: '/photos/realestate/house-exterior.png', alt: 'Home exterior with landscaping' },
-          { src: '/photos/realestate/conference-room.jpg', alt: 'Modern conference room' },
-          { src: '/photos/realestate/modern-kitchen.png', alt: 'Modern kitchen design' },
-          { src: '/photos/realestate/pool-lanai.png', alt: 'Pool and lanai area' },
-          { src: '/photos/realestate/luxury-hallway.jpg', alt: 'Luxury hallway design' },
-          { src: '/photos/realestate/meeting-room.jpg', alt: 'Meeting room interior' },
+          { src: '/photos/realestate/pool-evening.webp', alt: 'Luxury pool at twilight' },
+          { src: '/photos/realestate/modern-interior.webp', alt: 'Modern glass interior' },
+          { src: '/photos/realestate/wine-cellar.webp', alt: 'Luxury wine cellar' },
+          { src: '/photos/realestate/house-exterior.webp', alt: 'Home exterior with landscaping' },
+          { src: '/photos/realestate/conference-room.webp', alt: 'Modern conference room' },
+          { src: '/photos/realestate/modern-kitchen.webp', alt: 'Modern kitchen design' },
+          { src: '/photos/realestate/pool-lanai.webp', alt: 'Pool and lanai area' },
+          { src: '/photos/realestate/luxury-hallway.webp', alt: 'Luxury hallway design' },
+          { src: '/photos/realestate/meeting-room.webp', alt: 'Meeting room interior' },
         ]}
       />
 

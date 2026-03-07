@@ -325,22 +325,22 @@ export default function AutomotiveSports() {
         subtitle="Capturing speed, power, and precision"
         columns={3}
         photos={[
-          { src: '/photos/automotive/sports-car.jpg', alt: 'Sports car in motion' },
-          { src: '/photos/automotive/moto-racing-1.jpg', alt: 'Motorcycle track racing' },
-          { src: '/photos/automotive/carbon-detail.jpg', alt: 'Carbon fiber supercar detail' },
-          { src: '/photos/automotive/paint-booth-1.jpg', alt: 'Professional auto paint work' },
-          { src: '/photos/automotive/moto-racing-2.jpg', alt: 'Motorcycle racing action' },
-          { src: '/photos/automotive/classic-interior.jpg', alt: 'Classic car interior' },
-          { src: '/photos/automotive/moto-racing-3.jpg', alt: 'Race bike on track' },
-          { src: '/photos/automotive/paint-booth-2.jpg', alt: 'Auto body spray booth' },
-          { src: '/photos/automotive/moto-pit-1.jpg', alt: 'Pit area preparation' },
-          { src: '/photos/automotive/moto-racing-4.jpg', alt: 'Motorsport action shot' },
-          { src: '/photos/automotive/paint-booth-3.jpg', alt: 'Professional paint application' },
-          { src: '/photos/automotive/moto-racing-5.jpg', alt: 'Track racing cornering' },
-          { src: '/photos/fitness/training-session.jpg', alt: 'Athletic training session' },
-          { src: '/photos/automotive/moto-pit-2.jpg', alt: 'Rider in pit area' },
-          { src: '/photos/fitness/coach-athlete.jpg', alt: 'Coach guiding athlete' },
-          { src: '/photos/fitness/youth-training.jpg', alt: 'Youth sports training' },
+          { src: '/photos/automotive/sports-car.webp', alt: 'Sports car in motion' },
+          { src: '/photos/automotive/moto-racing-1.webp', alt: 'Motorcycle track racing' },
+          { src: '/photos/automotive/carbon-detail.webp', alt: 'Carbon fiber supercar detail' },
+          { src: '/photos/automotive/paint-booth-1.webp', alt: 'Professional auto paint work' },
+          { src: '/photos/automotive/moto-racing-2.webp', alt: 'Motorcycle racing action' },
+          { src: '/photos/automotive/classic-interior.webp', alt: 'Classic car interior' },
+          { src: '/photos/automotive/moto-racing-3.webp', alt: 'Race bike on track' },
+          { src: '/photos/automotive/paint-booth-2.webp', alt: 'Auto body spray booth' },
+          { src: '/photos/automotive/moto-pit-1.webp', alt: 'Pit area preparation' },
+          { src: '/photos/automotive/moto-racing-4.webp', alt: 'Motorsport action shot' },
+          { src: '/photos/automotive/paint-booth-3.webp', alt: 'Professional paint application' },
+          { src: '/photos/automotive/moto-racing-5.webp', alt: 'Track racing cornering' },
+          { src: '/photos/fitness/training-session.webp', alt: 'Athletic training session' },
+          { src: '/photos/automotive/moto-pit-2.webp', alt: 'Rider in pit area' },
+          { src: '/photos/fitness/coach-athlete.webp', alt: 'Coach guiding athlete' },
+          { src: '/photos/fitness/youth-training.webp', alt: 'Youth sports training' },
         ]}
       />
 

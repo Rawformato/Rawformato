@@ -50,9 +50,11 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="relative group">
-            <img 
-              src={logoWhite} 
-              alt="RAW Formato" 
+            <img
+              src={logoWhite}
+              alt="RAW Formato"
+              width={120}
+              height={40}
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
             <div className="absolute -inset-2 bg-[#E5E5E5]/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

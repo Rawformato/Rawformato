@@ -24,6 +24,14 @@ function cloudinarySrc(url: string, width: number): string {
   return `${match[1]}q_auto,w_${width}/${match[2]}`;
 }
 
+/** Generate a poster thumbnail from Cloudinary video URL */
+function videoPoster(url: string): string {
+  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/)(.+)\.mp4$/);
+  if (!m) return '';
+  const w = isMobile ? 480 : 720;
+  return `${m[1]}so_0,w_${w},q_auto,f_jpg/${m[2]}${m[3]}.jpg`;
+}
+
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
 export function VideoCard({
@@ -80,10 +88,11 @@ export function VideoCard({
         <video
           ref={videoRef}
           src={isMobile ? cloudinarySrc(src, 480) : cloudinarySrc(src, 720)}
+          poster={videoPoster(src)}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
         />
 

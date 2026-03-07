@@ -26,7 +26,7 @@ export default function Root() {
       <ScrollToTop />
       <Header />
       <main className="pt-20">
-        <Suspense fallback={<div className="min-h-screen" />}>
+        <Suspense fallback={<div className="min-h-screen bg-[#0B0B0E] flex items-center justify-center"><div className="w-8 h-8 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" /></div>}>
           <Outlet />
         </Suspense>
       </main>

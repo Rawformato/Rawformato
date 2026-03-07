@@ -12,6 +12,7 @@ export function ScrollableReel({ children, className = '' }: { children: React.R
     let offset = 0;
     let isPaused = false;
     let isDragging = false;
+    let isVisible = false;
     let startX = 0;
     let dragStartOffset = 0;
     let animationId = 0;
@@ -25,14 +26,25 @@ export function ScrollableReel({ children, className = '' }: { children: React.R
     };
 
     const tick = () => {
+      if (!isVisible && !isDragging) {
+        animationId = requestAnimationFrame(tick);
+        return;
+      }
       if (!isDragging && !isPaused) {
         offset -= 0.5;
       }
       wrapOffset();
-      inner.style.transform = `translateX(${offset}px)`;
+      inner.style.transform = `translate3d(${offset}px,0,0)`;
       animationId = requestAnimationFrame(tick);
     };
     animationId = requestAnimationFrame(tick);
+
+    // Only animate when visible (saves CPU/battery)
+    const visObserver = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { rootMargin: '100px' },
+    );
+    visObserver.observe(outer);
 
     /* ── Mouse drag (desktop) ── */
     const onMouseDown = (e: MouseEvent) => {
@@ -88,6 +100,7 @@ export function ScrollableReel({ children, className = '' }: { children: React.R
     return () => {
       cancelAnimationFrame(animationId);
       clearTimeout(resumeTimer);
+      visObserver.disconnect();
       outer.removeEventListener('mousedown', onMouseDown);
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
