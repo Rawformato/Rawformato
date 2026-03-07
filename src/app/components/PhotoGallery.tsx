@@ -1,5 +1,4 @@
 import { motion } from 'motion/react';
-import { useState, useRef, useEffect } from 'react';
 
 interface Photo {
   src: string;
@@ -15,36 +14,15 @@ interface PhotoGalleryProps {
 }
 
 function LazyImage({ src, alt }: { src: string; alt: string }) {
-  const [loaded, setLoaded] = useState(false);
-  const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { rootMargin: '200px' },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={ref} className="group relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-white/25 transition-all duration-500 bg-[#111]">
-      {inView && (
-        <img
-          src={src}
-          alt={alt}
-          width={600}
-          height={400}
-          loading="lazy"
-          decoding="async"
-          onLoad={() => setLoaded(true)}
-          className={`w-full h-auto object-cover transition-opacity duration-500 ${loaded ? 'opacity-100 group-hover:opacity-90' : 'opacity-0'}`}
-        />
-      )}
-      {!loaded && <div className="w-full aspect-[3/2] bg-[#1a1a1a] animate-pulse" />}
+    <div className="group relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-white/25 transition-all duration-500 bg-[#111]">
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-auto object-cover transition-opacity duration-500 group-hover:opacity-90"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
   );

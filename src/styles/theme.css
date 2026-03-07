@@ -167,27 +167,9 @@
   will-change: transform;
 }
 
-/* Off-screen content optimization — skip rendering for far-away sections */
-section {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
-}
-
 /* Optimize images for smooth scrolling */
 img {
   content-visibility: auto;
-  contain-intrinsic-size: 300px 200px;
-}
-
-/* Layout containment for card grids */
-.grid > * {
-  contain: layout style;
-}
-
-/* Optimize video elements */
-video {
-  content-visibility: auto;
-  contain-intrinsic-size: 480px 854px;
 }
 
 /* Reduce motion intensity on mobile to prevent jank */
