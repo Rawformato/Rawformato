@@ -1,5 +1,7 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import { useDeferredVideo, tryPlay, stopPlay, observeElement, usePrefersReducedMotion, getConnectionProfile } from '../lib/video';
+import { VideoSkeleton } from './VideoSkeleton';
 
 interface VideoCardProps {
   src: string;
@@ -18,39 +20,43 @@ function useIsTouchDevice() {
   return isTouch;
 }
 
-
 export function VideoCard({
   src,
   title,
   category,
   className = '',
   aspectClass = 'aspect-[9/16]',
-  priority = false,
 }: VideoCardProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const isTouch = useIsTouchDevice();
+  const reducedMotion = usePrefersReducedMotion();
+  const profile = getConnectionProfile();
+  const canPlay = !reducedMotion && profile !== 'minimal';
 
-  // On touch devices, use IntersectionObserver to auto-play when visible
+  const { videoRef, containerRef, loaded, shouldPlay } = useDeferredVideo({
+    src,
+    loadMargin: '200px',
+    unloadMargin: '1500px',
+  });
+
+  // On touch devices, use observer pool to auto-play when visible
   useEffect(() => {
-    if (!isTouch) return;
+    if (!isTouch || !canPlay) return;
     const el = containerRef.current;
     const video = videoRef.current;
     if (!el || !video) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
+    return observeElement(
+      el,
+      (entry) => {
+        if (entry.isIntersecting && video.src) {
+          tryPlay(video);
         } else {
-          video.pause();
+          stopPlay(video);
         }
       },
       { rootMargin: '50px', threshold: 0.3 },
     );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [isTouch]);
+  }, [isTouch, canPlay, containerRef, videoRef]);
 
   return (
     <motion.div
@@ -61,24 +67,27 @@ export function VideoCard({
       transition={{ duration: 0.5 }}
       className={`group relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-white/25 transition-all duration-500 cursor-pointer bg-[#111] ${className}`}
       onMouseEnter={() => {
-        if (!isTouch) videoRef.current?.play().catch(() => {});
+        if (!isTouch && canPlay) {
+          const video = videoRef.current;
+          if (video?.src) tryPlay(video);
+        }
       }}
       onMouseLeave={() => {
         if (!isTouch && videoRef.current) {
-          videoRef.current.pause();
+          stopPlay(videoRef.current);
           videoRef.current.currentTime = 0;
         }
       }}
     >
       <div className={`relative ${aspectClass}`}>
+        {!loaded && <VideoSkeleton />}
         <video
           ref={videoRef}
-          src={src}
           muted
           loop
           playsInline
-          preload={priority ? 'metadata' : 'none'}
-          className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
+          preload="none"
+          className={`w-full h-full object-cover group-hover:scale-[1.05] transition-all duration-700 ease-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
         />
 
         {/* Gradient overlay */}

@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { observeElement } from '../lib/video';
 
 export function ScrollableReel({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -39,12 +40,12 @@ export function ScrollableReel({ children, className = '' }: { children: React.R
     };
     animationId = requestAnimationFrame(tick);
 
-    // Only animate when visible (saves CPU/battery)
-    const visObserver = new IntersectionObserver(
-      ([entry]) => { isVisible = entry.isIntersecting; },
-      { rootMargin: '100px' },
+    // Only animate when visible (saves CPU/battery) — uses shared observer pool
+    const cleanupObserver = observeElement(
+      outer,
+      (entry) => { isVisible = entry.isIntersecting; },
+      { rootMargin: '100px', threshold: 0 },
     );
-    visObserver.observe(outer);
 
     /* ── Mouse drag (desktop) ── */
     const onMouseDown = (e: MouseEvent) => {
@@ -100,7 +101,7 @@ export function ScrollableReel({ children, className = '' }: { children: React.R
     return () => {
       cancelAnimationFrame(animationId);
       clearTimeout(resumeTimer);
-      visObserver.disconnect();
+      cleanupObserver();
       outer.removeEventListener('mousedown', onMouseDown);
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
