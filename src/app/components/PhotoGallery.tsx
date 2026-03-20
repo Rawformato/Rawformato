@@ -4,6 +4,8 @@ interface Photo {
   src: string;
   alt: string;
   span?: 'tall' | 'wide' | 'normal';
+  width?: number;
+  height?: number;
 }
 
 interface PhotoGalleryProps {
@@ -13,7 +15,7 @@ interface PhotoGalleryProps {
   columns?: 2 | 3 | 4;
 }
 
-function LazyImage({ src, alt }: { src: string; alt: string }) {
+function LazyImage({ src, alt, width, height }: { src: string; alt: string; width?: number; height?: number }) {
   return (
     <div className="group relative rounded-2xl overflow-hidden border border-white/[0.08] hover:border-white/25 transition-all duration-500 bg-[#111]">
       <img
@@ -21,6 +23,8 @@ function LazyImage({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         loading="lazy"
         decoding="async"
+        width={width}
+        height={height}
         className="w-full h-auto object-cover transition-opacity duration-500 group-hover:opacity-90"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -67,7 +71,7 @@ export function PhotoGallery({ photos, title, subtitle, columns = 3 }: PhotoGall
               transition={{ duration: 0.4 }}
               className={`mb-3 md:mb-4 break-inside-avoid ${index >= 8 ? 'hidden md:block' : ''}`}
             >
-              <LazyImage src={photo.src} alt={photo.alt} />
+              <LazyImage src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} />
             </motion.div>
           ))}
         </div>

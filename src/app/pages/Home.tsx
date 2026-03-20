@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import {
   Zap,
   Target,
@@ -29,106 +29,8 @@ import { Stats } from '../components/Stats';
 import { PhotoGallery } from '../components/PhotoGallery';
 import { ScrollableReel } from '../components/ScrollableReel';
 import { SEO } from '../components/SEO';
-
-/* ── Cloudinary helpers ── */
-const _isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-function mobileSrc(url: string): string {
-  if (!_isMobile) return url;
-  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/.+)$/);
-  return m ? `${m[1]}q_auto,w_480/${m[2]}` : url;
-}
-
-function videoPoster(url: string): string {
-  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/)(.+)\.mp4$/);
-  if (!m) return '';
-  const w = _isMobile ? 480 : 720;
-  return `${m[1]}so_0,w_${w},q_auto,f_jpg/${m[2]}${m[3]}.jpg`;
-}
-
-function tryPlay(video: HTMLVideoElement) {
-  video.play().catch(() => {
-    setTimeout(() => video.play().catch(() => {}), 300);
-  });
-}
-
-/* ────────────────────────────────────────────────
-   useLazyVideo — play video only when visible
-   ──────────────────────────────────────────────── */
-function useLazyVideo(options: { rootMargin?: string } = {}) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    const video = videoRef.current;
-    if (!el || !video) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          tryPlay(video);
-        } else {
-          video.pause();
-        }
-      },
-      { rootMargin: options.rootMargin ?? '200px', threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [options.rootMargin]);
-
-  return { videoRef, containerRef };
-}
-
-/* ────────────────────────────────────────────────
-   ReelVideo — lazy play only when visible in viewport
-   ──────────────────────────────────────────────── */
-function ReelVideo({ src }: { src: string }) {
-  const { videoRef, containerRef } = useLazyVideo({ rootMargin: '100px' });
-  const optimized = mobileSrc(src);
-
-  return (
-    <div
-      ref={containerRef}
-      className="flex-shrink-0 w-48 md:w-64 lg:w-72 aspect-[9/16] rounded-2xl overflow-hidden border border-white/[0.06] bg-[#111]"
-    >
-      <video
-        ref={videoRef}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={videoPoster(src)}
-        src={optimized}
-        className="w-full h-full object-cover"
-      />
-    </div>
-  );
-}
-
-/* ────────────────────────────────────────────────
-   LazyVideo — autoplay only when visible
-   ──────────────────────────────────────────────── */
-function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
-  const { videoRef, containerRef } = useLazyVideo({ rootMargin: '200px' });
-  const optimized = mobileSrc(src);
-
-  return (
-    <div ref={containerRef} className="w-full h-full">
-      <video
-        ref={videoRef}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={videoPoster(src)}
-        src={optimized}
-        className={className}
-      />
-    </div>
-  );
-}
+import { LazyVideo, ReelVideo } from '../components/LazyVideo';
+import { VIDEO_BASE } from '../lib/video';
 
 /* ────────────────────────────────────────────────
    Home Page
@@ -181,38 +83,38 @@ export default function Home() {
       industry: 'Automotive',
       outcome: '240% increase in qualified leads',
       description: 'Performance campaign for luxury automotive brand',
-      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
+      video: `${VIDEO_BASE}/prestige_teaser.mp4`,
     },
     {
       industry: 'Restaurant',
       outcome: '4.2M impressions in 90 days',
       description: 'Viral content strategy for restaurant group',
-      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
+      video: `${VIDEO_BASE}/delucas.mp4`,
     },
     {
       industry: 'Real Estate',
       outcome: '$890K in pipeline value',
       description: 'Premium lead funnel for luxury properties',
-      video: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4',
+      video: `${VIDEO_BASE}/rhino_homes_recap.mp4`,
     },
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4', title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493275/POV_A_la_Cruz_gxwtdq.mp4', title: 'Crave-Worthy Content', category: 'Food & Beverage' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Automotive Cinematic', category: 'Automotive' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492921/Rhino_Homes_Recap_jvwrpz.mp4', title: 'Architecture Recap', category: 'Real Estate' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4', title: 'Strength & Power', category: 'Fitness' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
+    { src: `${VIDEO_BASE}/hausmash.mp4`, title: 'Let The Fire Guide Your Senses', category: 'Restaurant' },
+    { src: `${VIDEO_BASE}/pov_a_la_cruz.mp4`, title: 'Crave-Worthy Content', category: 'Food & Beverage' },
+    { src: `${VIDEO_BASE}/prestige_teaser.mp4`, title: 'Automotive Cinematic', category: 'Automotive' },
+    { src: `${VIDEO_BASE}/rhino_homes_recap.mp4`, title: 'Architecture Recap', category: 'Real Estate' },
+    { src: `${VIDEO_BASE}/alejandro_meza.mp4`, title: 'Strength & Power', category: 'Fitness' },
+    { src: `${VIDEO_BASE}/aprilia_trendy.mp4`, title: 'Motorsport Showcase', category: 'Motorsport' },
   ];
 
   const reelVideos = [
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493151/Hausmash_nyllt4.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/DeLuca_s_o2vynp.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492925/Wine_Cellar_kb6fsd.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4',
+    `${VIDEO_BASE}/hausmash.mp4`,
+    `${VIDEO_BASE}/prestige_teaser.mp4`,
+    `${VIDEO_BASE}/delucas.mp4`,
+    `${VIDEO_BASE}/wine_cellar.mp4`,
+    `${VIDEO_BASE}/alejandro_meza.mp4`,
+    `${VIDEO_BASE}/aprilia_trendy.mp4`,
   ];
 
   /* ── Render ────────────────────────────── */
@@ -239,17 +141,9 @@ export default function Home() {
             loop
             playsInline
             preload="auto"
-            poster="https://res.cloudinary.com/dvad6wd2v/video/upload/so_0,w_1280,q_auto,f_jpg/v1772055615/hero_rxmpqm.jpg"
+            src={`${VIDEO_BASE}/hero.mov`}
             className="absolute inset-0 w-full h-full object-cover"
-          >
-            {/* Mobile: lower quality for bandwidth */}
-            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/q_auto,w_720/v1772055622/hero_snlduv.webm" type="video/webm" media="(max-width: 768px)" />
-            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/q_auto,w_720/v1772055615/hero_rxmpqm.mp4" type="video/mp4" media="(max-width: 768px)" />
-            {/* Desktop: full quality */}
-            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055622/hero_snlduv.webm" type="video/webm" />
-            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055615/hero_rxmpqm.mp4" type="video/mp4" />
-            <source src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772055615/hero_rxmpqm.mov" type="video/quicktime" />
-          </video>
+          />
         </div>
 
         {/* Cinematic overlay layers */}
@@ -373,6 +267,7 @@ export default function Home() {
                 src={video.src}
                 title={video.title}
                 category={video.category}
+                priority={index < 2}
               />
             ))}
           </div>
@@ -707,7 +602,7 @@ export default function Home() {
         {/* Video background — lazy loaded */}
         <div className="absolute inset-0">
           <LazyVideo
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492971/POV_A_la_Cruz_8_lcmbfs.mp4"
+            src={`${VIDEO_BASE}/pov_a_la_cruz_8.mp4`}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-[#0B0B0E]/85" />

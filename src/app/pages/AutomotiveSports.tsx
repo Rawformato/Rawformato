@@ -1,4 +1,3 @@
-import { useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   Target,
@@ -19,54 +18,8 @@ import { FAQ } from '../components/FAQ';
 import { PhotoGallery } from '../components/PhotoGallery';
 import { ScrollableReel } from '../components/ScrollableReel';
 import { SEO } from '../components/SEO';
-
-/* ── Lazy video: play only when visible ── */
-const _isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-function mobileSrc(url: string): string {
-  if (!_isMobile) return url;
-  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/.+)$/);
-  return m ? `${m[1]}q_auto,w_480/${m[2]}` : url;
-}
-
-function videoPoster(url: string): string {
-  const m = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/video\/upload\/)(v\d+\/)(.+)\.mp4$/);
-  if (!m) return '';
-  const w = _isMobile ? 480 : 720;
-  return `${m[1]}so_0,w_${w},q_auto,f_jpg/${m[2]}${m[3]}.jpg`;
-}
-
-function tryPlay(video: HTMLVideoElement) {
-  video.play().catch(() => {
-    setTimeout(() => video.play().catch(() => {}), 300);
-  });
-}
-
-function LazyVideo({ src, className = '' }: { src: string; className?: string }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    const video = videoRef.current;
-    if (!el || !video) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) tryPlay(video);
-        else video.pause();
-      },
-      { rootMargin: '200px', threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={containerRef} className="w-full h-full">
-      <video ref={videoRef} muted loop playsInline preload="metadata" poster={videoPoster(src)} src={mobileSrc(src)} className={className} />
-    </div>
-  );
-}
+import { LazyVideo, ReelVideo } from '../components/LazyVideo';
+import { VIDEO_BASE } from '../lib/video';
 
 export default function AutomotiveSports() {
   const deliverables = [
@@ -120,23 +73,23 @@ export default function AutomotiveSports() {
   ];
 
   const showcaseVideos = [
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4', title: 'Cinematic Teaser', category: 'Automotive' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492960/Mimessi_Carro_Caf%C3%A9_jtigoh.mp4', title: 'Luxury Collection', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4', title: 'Performance Build', category: 'Performance' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4', title: 'Luxury Showcase', category: 'Luxury Cars' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4', title: 'Motorsport Showcase', category: 'Motorsport' },
-    { src: 'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Hayabusa_radq7o.mp4', title: 'Speed Unleashed', category: 'Motorsport' },
+    { src: `${VIDEO_BASE}/prestige_teaser.mp4`, title: 'Cinematic Teaser', category: 'Automotive' },
+    { src: `${VIDEO_BASE}/mimessi_carro_cafe.mp4`, title: 'Luxury Collection', category: 'Luxury Cars' },
+    { src: `${VIDEO_BASE}/auto_rojo_mfk.mp4`, title: 'Performance Build', category: 'Performance' },
+    { src: `${VIDEO_BASE}/aston_martin.mp4`, title: 'Luxury Showcase', category: 'Luxury Cars' },
+    { src: `${VIDEO_BASE}/aprilia_trendy.mp4`, title: 'Motorsport Showcase', category: 'Motorsport' },
+    { src: `${VIDEO_BASE}/hayabusa.mp4`, title: 'Speed Unleashed', category: 'Motorsport' },
   ];
 
   const reelVideos = [
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Aprilia_Trendy_xnal0t.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Hayabusa_radq7o.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492934/Alejandro_Meza_ci14b6.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492959/Auto_Rojo_MFK_lagwde.mp4',
-    'https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492961/POV_A_la_Cruz_6_u1l0au.mp4',
+    `${VIDEO_BASE}/prestige_teaser.mp4`,
+    `${VIDEO_BASE}/auto_rojo_mfk.mp4`,
+    `${VIDEO_BASE}/aprilia_trendy.mp4`,
+    `${VIDEO_BASE}/aston_martin.mp4`,
+    `${VIDEO_BASE}/hayabusa.mp4`,
+    `${VIDEO_BASE}/alejandro_meza.mp4`,
+    `${VIDEO_BASE}/auto_rojo_mfk.mp4`,
+    `${VIDEO_BASE}/pov_a_la_cruz_6.mp4`,
   ];
 
   return (
@@ -153,15 +106,10 @@ export default function AutomotiveSports() {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden -mt-20 pt-20">
         <div className="absolute inset-0">
           {/* Mobile: static poster; Desktop: autoplay video */}
-          <img
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/so_0,w_1280,q_auto,f_jpg/v1772493158/Prestige_Teaser_o7jwga.jpg"
-            alt=""
-            className="md:hidden w-full h-full object-cover opacity-40"
-          />
           <video
             autoPlay muted loop playsInline preload="metadata"
-            src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Prestige_Teaser_o7jwga.mp4"
-            className="hidden md:block w-full h-full object-cover opacity-40"
+            src={`${VIDEO_BASE}/prestige_teaser.mp4`}
+            className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/60 via-[#0B0B0E]/50 to-[#0B0B0E]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0E]/40 via-transparent to-[#0B0B0E]/40" />
@@ -281,6 +229,7 @@ export default function AutomotiveSports() {
                 src={video.src}
                 title={video.title}
                 category={video.category}
+                priority={index < 2}
               />
             ))}
           </div>
@@ -307,12 +256,7 @@ export default function AutomotiveSports() {
 
         <ScrollableReel className="gap-4 md:gap-6">
           {[...reelVideos, ...reelVideos].map((src, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 w-48 md:w-64 lg:w-72 aspect-[9/16] rounded-2xl overflow-hidden border border-white/[0.06] bg-[#111]"
-            >
-              <LazyVideo src={src} className="w-full h-full object-cover" />
-            </div>
+            <ReelVideo key={index} src={src} />
           ))}
         </ScrollableReel>
       </section>
@@ -358,7 +302,7 @@ export default function AutomotiveSports() {
               className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video group"
             >
               <LazyVideo
-                src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772493158/Auto_Rojo_MFK_dsqqtu.mp4"
+                src={`${VIDEO_BASE}/auto_rojo_mfk.mp4`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0E]/80 via-transparent to-transparent" />
@@ -557,7 +501,7 @@ export default function AutomotiveSports() {
           ═══════════════════════════════════════ */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <LazyVideo src="https://res.cloudinary.com/dvad6wd2v/video/upload/v1772492966/Aston_Martin_nhbihr.mp4" className="w-full h-full object-cover" />
+          <LazyVideo src={`${VIDEO_BASE}/aston_martin.mp4`} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0B0B0E]/80" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0E] via-transparent to-[#0B0B0E]" />
         </div>
